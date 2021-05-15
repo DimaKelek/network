@@ -8,12 +8,11 @@ type NavbarPropsType = {
 }
 
 export function Navbar(props: NavbarPropsType) {
-    const navbarData = props.navbar.navbarData
-    const menuItems = navbarData.map( (m) => <MenuItem key={m.id} id={m.id} title={m.title} path={m.path} />)
+    const navbarMenuItems = props.navbar.navbarMenu.map( (m) => <MenuItem key={m.id} id={m.id} title={m.title} path={m.path} />)
     return (
         <nav className={S.nav}>
             <div className={S.menu}>
-                {menuItems}
+                {navbarMenuItems}
             </div>
         </nav>
     );

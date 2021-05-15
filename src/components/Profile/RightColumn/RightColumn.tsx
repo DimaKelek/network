@@ -1,25 +1,18 @@
 import React from "react";
 import S from "./RightColumn.module.css"
-import {MyPosts} from "./MyPosts/MyPosts";
-import { Description } from "./Description/Description";
-import { ActionsTypes } from "../../../redux/redux-store";
-import { PostType } from "../../../redux/profileReducer";
+import {Description} from "./Description/Description";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {StoreType} from "../../../redux/redux-store";
 
 type RightColumnPropsType = {
-    posts: Array<PostType>
-    newPostText: string
-    dispatch: (action: ActionsTypes) => void
+    store: StoreType
 }
 
 export function RightColumn(props: RightColumnPropsType) {
     return (
         <div className={S.content}>
             <Description />
-            <MyPosts
-                posts={props.posts}
-                newPostText={props.newPostText}
-                dispatch={props.dispatch}
-            />
+            <MyPostsContainer store={props.store} />
         </div>
     );
 }

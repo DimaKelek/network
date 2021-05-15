@@ -1,17 +1,17 @@
 import {ActionsTypes} from "./redux-store";
 import {v1} from "uuid";
 
-type NavbarType = {
+export type NavbarType = {
     id: string
     title: string
     path: string
 }
 export type NavbarMenuType = {
-    navbarData: Array<NavbarType>
+    navbarMenu: Array<NavbarType>
 }
 
 const initialState = {
-    navbarData: [
+    navbarMenu: [
         {id: v1(), title: "✓ Profile", path: "profile"},
         {id: v1(), title: "✉ Messages", path: "dialogs"},
         {id: v1(), title: "☖ News", path: "news"},

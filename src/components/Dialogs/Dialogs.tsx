@@ -2,29 +2,30 @@ import React from "react";
 import S from "./Dialogs.module.css"
 import {DialogItem} from "./Dialog/DialogItem";
 import {Message} from "./Messages/MessageItem";
-import {addMessageAC, DialogPageType, updateMessageTextAC} from "../../redux/dialogsReducer";
-import {ActionsTypes} from "../../redux/redux-store";
+import {DialogType, MessageType} from "../../redux/dialogsReducer";
 
 type DialogsPagePropsType = {
-    dialogsPage: DialogPageType
-    dispatch: (action: ActionsTypes) => void
+    sendMessage: () => void
+    onMessageChange: (newText: string) => void
+    newMessageText: string
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
 }
 
 export function Dialogs(props: DialogsPagePropsType) {
-    debugger
-    const dialogs = props.dialogsPage.dialogs.map( d => <DialogItem key={d.id} id={d.id} name={d.name} />);
-    const messages = props.dialogsPage.messages.map( d => <Message key={d.id} id={d.id} message={d.message} />);
+    const dialogs = props.dialogs.map( d => <DialogItem key={d.id} id={d.id} name={d.name} />);
+    const messages = props.messages.map( d => <Message key={d.id} id={d.id} message={d.message} />);
 
     const newMessage = React.createRef<HTMLTextAreaElement>()
     const sendMessage = () => {
         if(newMessage.current) {
-            props.dispatch(addMessageAC())
+            props.sendMessage()
         }
     }
     const onMessageChange = () => {
         if(newMessage.current) {
             const newText = newMessage.current.value
-            props.dispatch(updateMessageTextAC(newText))
+            props.onMessageChange(newText)
         }
     }
     return (
@@ -38,7 +39,7 @@ export function Dialogs(props: DialogsPagePropsType) {
             <div className={S.addMessage_box}>
                 <div><textarea
                     ref={newMessage}
-                    value={props.dialogsPage.newMessageText}
+                    value={props.newMessageText}
                     onChange={onMessageChange}
                     placeholder="Enter your message!!!"/>
                 </div>
