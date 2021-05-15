@@ -1,0 +1,16 @@
+.header {
+    grid-area: h;
+    background-color: black;
+}
+
+.header img {
+    width: 180px;
+}
+
+.name_project {
+    float: right;
+    color: #3384e5;
+    font-size: 60px;
+    text-shadow: 0 0 10px #2196f3;
+    padding: 10px 15%;
+}

@@ -1,0 +1,8 @@
+.header_box {
+    grid-area: h;
+    padding-bottom: 20px;
+    text-align: center;
+}
+.header_box img {
+    width: 800px;
+}

@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/src/redux/redux(пример создания).ts
+
+/.idea

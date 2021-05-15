@@ -1,0 +1,29 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 30px;
+    padding: 15px;
+    margin-top: 20px;
+    grid-template-areas:
+    "d m"
+    "d am";
+}
+
+.messages_box {
+    background-size: 700px;
+    background-image: url('https://goo.su/4ZdX');
+    /*background-repeat: no-repeat;*/
+    background-position: center center;
+    padding: 20px;
+    border-radius: 20px;
+    grid-area: m;
+}
+
+.dialogs_box {
+    margin-left: 20px;
+    grid-area: d;
+}
+.addMessage_box {
+    grid-area: am;
+}
