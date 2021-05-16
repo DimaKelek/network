@@ -33,11 +33,12 @@ import {connect} from "react-redux";
     );
 }*/
 type MapStatePropsType = DialogPageType
-
 type MapDispatchPropsType = {
     sendMessage: () => void
     onMessageChange: (newText: string) => void
 }
+
+export type DialogsPagePropsType = MapStatePropsType & MapDispatchPropsType
 
 const mapStateToProps = (state: RootType): MapStatePropsType => {
     return {

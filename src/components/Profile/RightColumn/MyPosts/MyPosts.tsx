@@ -1,15 +1,7 @@
 import React from 'react';
 import S from './MyPosts.module.css';
 import {Post} from "./Post/Post";
-import {PostType} from "../../../../redux/profileReducer";
-
-
-export type MyPostsPropsType = {
-    posts: Array<PostType>
-    newPostText: string
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-}
+import {MyPostsPropsType} from "./MyPostsContainer";
 
 export function MyPosts(props: MyPostsPropsType) {
 

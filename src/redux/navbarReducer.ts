@@ -7,11 +7,11 @@ export type NavbarType = {
     path: string
 }
 export type NavbarMenuType = {
-    navbarMenu: Array<NavbarType>
+    navbarItems: Array<NavbarType>
 }
 
 const initialState: NavbarMenuType = {
-    navbarMenu: [
+    navbarItems: [
         {id: v1(), title: "✓ Profile", path: "profile"},
         {id: v1(), title: "✉ Messages", path: "dialogs"},
         {id: v1(), title: "☖ News", path: "news"},

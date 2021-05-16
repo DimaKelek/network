@@ -4,39 +4,14 @@ import {ActionsTypes, RootType} from '../../../../redux/redux-store';
 import {MyPosts} from './MyPosts';
 import {addPostAC, ProfilePageType, updateNewPostAC} from "../../../../redux/profileReducer";
 
-/*
-type MyPostsContainerPropsType = {
-    store: StoreType
-}
-
-export function MyPostsContainer(props: MyPostsContainerPropsType) {
-    const profilePageState = props.store.getState().profilePage
-    const posts = profilePageState.posts
-    const value = profilePageState.newPostText
-
-    const addPost = () => {
-        props.store.dispatch(addPostAC())
-    }
-    const onPostChange = (newText: string) => {
-        props.store.dispatch(updateNewPostAC(newText))
-    }
-
-    return (
-       <MyPosts
-           posts={posts}
-           addPost={addPost}
-           updateNewPostText={onPostChange}
-           newPostText={value}
-       />
-    );
-}*/
 
 type MapStatePropsType = ProfilePageType
-
 type MapDispatchPropsType = {
     addPost: () => void
     updateNewPostText: (newText: string) => void
 }
+
+export type MyPostsPropsType = MapStatePropsType & MapDispatchPropsType
 
 const mapStateToProps = (state: RootType): MapStatePropsType => {
     return {

@@ -29,4 +29,4 @@ const reducers = combineReducers({
     navbar: navbarReducer
 })
 
-export const store: StoreType = createStore(reducers);
+export const store = createStore(reducers);

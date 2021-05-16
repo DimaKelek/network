@@ -6,19 +6,18 @@ import {Route} from 'react-router-dom';
 import {News} from "./components/News/News";
 import {Music} from './components/Music/Music';
 import {Settings} from "./components/Settings/Settings";
-import {StoreType} from './redux/redux-store';
 import {NavbarContainer} from './components/Navbar/NavbarContainer';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 
 type AppPropsType = {
-    store: StoreType
+
 }
 
 function App(props: AppPropsType) {
     return (
         <div className="app-wrapper">
             <Header/>
-            <NavbarContainer store={props.store}/>
+            <NavbarContainer />
             <div className="app-wrapper-content">
                 <Route path="/dialogs" render={() => <DialogsContainer />}/>
                 <Route path="/profile" render={() => <Profile />}/>
