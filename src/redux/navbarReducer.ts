@@ -10,7 +10,7 @@ export type NavbarMenuType = {
     navbarMenu: Array<NavbarType>
 }
 
-const initialState = {
+const initialState: NavbarMenuType = {
     navbarMenu: [
         {id: v1(), title: "✓ Profile", path: "profile"},
         {id: v1(), title: "✉ Messages", path: "dialogs"},

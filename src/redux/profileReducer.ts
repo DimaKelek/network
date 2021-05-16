@@ -10,7 +10,7 @@ export type PostType = {
     message: string
 }
 
-const initialState = {
+const initialState: ProfilePageType = {
     posts: [
         {id: v1(), message: "Hi"},
         {id: v1(), message: "How are you?"},

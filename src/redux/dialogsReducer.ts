@@ -15,7 +15,7 @@ export type MessageType = {
     message: string
 }
 
-const initialState = {
+const initialState: DialogPageType = {
     dialogs: [
         {id: v1(), name: "Виталик"},
         {id: v1(), name: "Яна"},
