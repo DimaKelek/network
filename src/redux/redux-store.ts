@@ -1,21 +1,8 @@
-import {createStore, combineReducers} from "redux"
-import {addMessageAC, DialogPageType, dialogsReducer, updateMessageTextAC} from "./dialogsReducer";
-import {addPostAC, ProfilePageType, profileReducer, updateNewPostAC} from "./profileReducer";
-import {NavbarMenuType, navbarReducer} from "./navbarReducer";
+import {combineReducers, createStore} from "redux"
+import {addMessageAC, dialogsReducer, updateMessageTextAC} from "./dialogsReducer";
+import {addPostAC, profileReducer, updateNewPostAC} from "./profileReducer";
+import {navbarReducer} from "./navbarReducer";
 
-
-export type RootType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogPageType
-    navbar: NavbarMenuType
-}
-export type StoreType = {
-    _state: RootType
-    subscribe: (observer: () => void) => void
-    getState: () => RootType
-    _callSubscriber: () => void
-    dispatch: (action: ActionsTypes) => void
-}
 
 export type ActionsTypes =
     ReturnType<typeof addPostAC>
@@ -23,10 +10,12 @@ export type ActionsTypes =
     | ReturnType<typeof updateNewPostAC>
     | ReturnType<typeof updateMessageTextAC>
 
-const reducers = combineReducers({
+export type AppStateType = ReturnType<typeof rootReducer>
+
+const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     navbar: navbarReducer
 })
 
-export const store = createStore(reducers);
+export const store = createStore(rootReducer);

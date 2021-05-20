@@ -31,26 +31,31 @@ const initialState: DialogPageType = {
     newMessageText: ""
 }
 
-export const dialogsReducer = (state: DialogPageType = initialState, action: ActionsTypes) => {
-    if(action.type === "UPDATE-NEW-MESSAGE-TEXT") {
-        state.newMessageText = action.newText
-    } else if(action.type === "SEND_MESSAGE") {
-        let newMessage: MessageType = {
-            id: v1(),
-            message: state.newMessageText
+export const dialogsReducer = (state: DialogPageType = initialState, action: ActionsTypes): DialogPageType => {
+    switch (action.type) {
+        case "SEND_MESSAGE": {
+            let newMessage: MessageType = {
+                id: v1(),
+                message: state.newMessageText
+            }
+            let newState = {...state}
+            newState.messages = [...state.messages]
+            newState.messages.push(newMessage)
+            newState.newMessageText = ""
+            return newState
         }
-        state.messages.push(newMessage)
-        state.newMessageText = ""
+        case "UPDATE-NEW-MESSAGE-TEXT": {
+            let newState = {...state}
+            newState.newMessageText = action.newText
+            return newState
+        }
+        default: return state
     }
-    return state;
 }
 
 export const addMessageAC = () => {
     return {type: "SEND_MESSAGE"} as const
 }
 export const updateMessageTextAC = (newText: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-TEXT",
-        newText: newText
-    } as const
+    return {type: "UPDATE-NEW-MESSAGE-TEXT", newText: newText} as const
 }

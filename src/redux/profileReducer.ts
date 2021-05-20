@@ -19,26 +19,31 @@ const initialState: ProfilePageType = {
     newPostText: ""
 }
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
-    if(action.type === "ADD-POST") {
-        let newPost: PostType = {
-            id: v1(),
-            message: state.newPostText
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
+    switch (action.type) {
+        case "ADD-POST": {
+            let newPost: PostType = {
+                id: v1(),
+                message: state.newPostText
+            }
+            let newState = {...state}
+            newState.posts = [...state.posts]
+            newState.posts.unshift(newPost)
+            newState.newPostText = ""
+            return newState
         }
-        state.posts.unshift(newPost)
-        state.newPostText = ""
-    } else if(action.type === "UPDATE-NEW-POST-TEXT") {
-        state.newPostText = action.newText
+        case "UPDATE-NEW-POST-TEXT": {
+            let newState = {...state}
+            newState.newPostText = action.newText
+            return newState
+        }
+        default: return state
     }
-    return state;
 }
 
 export const addPostAC = () => {
     return {type: "ADD-POST"} as const
 }
 export const updateNewPostAC = (newText: string) => {
-    return {
-        type: "UPDATE-NEW-POST-TEXT",
-        newText: newText
-    } as const
+    return {type: "UPDATE-NEW-POST-TEXT", newText: newText} as const
 }

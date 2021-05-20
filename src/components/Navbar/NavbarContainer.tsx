@@ -1,6 +1,6 @@
 import React from 'react';
 import {Navbar} from "./Navbar";
-import {ActionsTypes, RootType} from "../../redux/redux-store";
+import {ActionsTypes, AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
 import {NavbarMenuType} from "../../redux/navbarReducer";
 
@@ -11,7 +11,7 @@ type MapDispatchPropsType = {
 
 export type NavbarPropsType = MapStatePropsType & MapDispatchPropsType
 
-const mapStateToProps = (state: RootType): MapStatePropsType => {
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         navbarItems: state.navbar.navbarItems
     }
