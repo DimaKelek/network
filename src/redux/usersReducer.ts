@@ -1,10 +1,10 @@
 import { v1 } from "uuid";
 
-type LocationType = {
+export type LocationType = {
     country: string
     city: string
 }
-type UserType = {
+export type UserType = {
     id: string
     firstname: string
     avatar: string
@@ -12,11 +12,11 @@ type UserType = {
     location: LocationType
     status: string
 }
-type UsersPageType = {
+export type UsersPageType = {
     users: Array<UserType>
 }
 
-const initialState: UsersPageType = {
+export const initialState: UsersPageType = {
     users: [
         {
             id: v1(),
@@ -82,9 +82,9 @@ export const usersReducer = (state = initialState, action: ActionsType): UsersPa
     }
 }
 
-const followAC = (userID: string) => {
+export const followAC = (userID: string) => {
     return {type: "FOLLOW", userID} as const
 }
-const unfollowAC = (userID: string) => {
+export const unfollowAC = (userID: string) => {
     return {type: "UNFOLLOW", userID} as const
 }
