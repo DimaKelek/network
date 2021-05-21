@@ -31,14 +31,14 @@ export const initialState: UsersPageType = {
         },
         {
             id: v1(),
-            firstname: "Ira",
+            firstname: "Irina",
             avatar: "https://goo.su/5JXV",
             followed: false,
             location: {
                 country: "Belarus",
                 city: "Minsk"
             },
-            status: "Hello, i'm Ira"
+            status: "Hello, i'm Irina"
         },
         {
             id: v1(),

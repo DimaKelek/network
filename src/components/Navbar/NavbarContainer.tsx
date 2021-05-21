@@ -8,8 +8,10 @@ type MapStatePropsType = NavbarMenuType
 type MapDispatchPropsType = {
 
 }
-
-export type NavbarPropsType = MapStatePropsType & MapDispatchPropsType
+type UrlType = {
+    setUrl: (newUrl: string) => void
+}
+export type NavbarPropsType = MapStatePropsType & MapDispatchPropsType & UrlType
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {

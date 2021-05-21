@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
 import {Profile} from "./components/Profile/Profile";
@@ -15,10 +15,11 @@ type AppPropsType = {
 }
 
 function App(props: AppPropsType) {
+    const [url, setUrl] = useState<string>("SOCIAL NETWORK")
     return (
         <div className="app-wrapper">
-            <Header/>
-            <NavbarContainer />
+            <Header url={url}/>
+            <NavbarContainer setUrl={setUrl}/>
             <div className="app-wrapper-content">
                 <Route path="/dialogs" render={() => <DialogsContainer />}/>
                 <Route path="/profile" render={() => <Profile />}/>
