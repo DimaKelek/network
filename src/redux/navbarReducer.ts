@@ -1,4 +1,3 @@
-import {ActionsTypes} from "./redux-store";
 import {v1} from "uuid";
 
 export type NavbarType = {
@@ -10,6 +9,7 @@ export type NavbarMenuType = {
     navbarItems: Array<NavbarType>
 }
 
+type ActionsType = {}
 const initialState: NavbarMenuType = {
     navbarItems: [
         {id: v1(), title: "✓ Profile", path: "profile"},
@@ -20,6 +20,6 @@ const initialState: NavbarMenuType = {
     ]
 }
 
-export const navbarReducer = (state: NavbarMenuType = initialState, action: ActionsTypes) => {
+export const navbarReducer = (state: NavbarMenuType = initialState, action: ActionsType) => {
     return state;
 }
