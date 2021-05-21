@@ -18,9 +18,9 @@ const initialState: ProfilePageType = {
     newPostText: ""
 }
 
-type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostAC>
+export type ProfilePageActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostAC>
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionsType): ProfilePageType => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ProfilePageActionsType): ProfilePageType => {
     switch (action.type) {
         case "ADD-POST": {
             let newPost: PostType = {id: v1(), message: state.newPostText}

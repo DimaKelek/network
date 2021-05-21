@@ -30,9 +30,9 @@ const initialState: DialogPageType = {
     newMessageText: ""
 }
 
-export type ActionsType = ReturnType<typeof addMessageAC> | ReturnType<typeof updateMessageTextAC>
+export type DialogsPageActionsType = ReturnType<typeof addMessageAC> | ReturnType<typeof updateMessageTextAC>
 
-export const dialogsReducer = (state: DialogPageType = initialState, action: ActionsType): DialogPageType => {
+export const dialogsReducer = (state: DialogPageType = initialState, action: DialogsPageActionsType): DialogPageType => {
     switch (action.type) {
         case "SEND_MESSAGE": {
             let newMessage: MessageType = {id: v1(), message: state.newMessageText}

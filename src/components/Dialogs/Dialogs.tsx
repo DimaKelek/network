@@ -4,7 +4,6 @@ import {DialogItem} from "./Dialog/DialogItem";
 import {Message} from "./Messages/MessageItem";
 import {DialogsPagePropsType} from "./DialogsContainer";
 
-
 export function Dialogs(props: DialogsPagePropsType) {
     const dialogs = props.dialogs.map( d => <DialogItem key={d.id} id={d.id} name={d.name} />);
     const messages = props.messages.map( d => <Message key={d.id} id={d.id} message={d.message} />);

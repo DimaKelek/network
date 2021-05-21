@@ -21,7 +21,7 @@ export const initialState: UsersPageType = {
         {
             id: v1(),
             firstname: "Vitalik",
-            avatar: "https://goo.su/4zdi",
+            avatar: "https://goo.su/5jxu",
             followed: true,
             location: {
                 country: "Belarus",
@@ -32,7 +32,7 @@ export const initialState: UsersPageType = {
         {
             id: v1(),
             firstname: "Ira",
-            avatar: "https://goo.su/4zdi",
+            avatar: "https://goo.su/5JXV",
             followed: false,
             location: {
                 country: "Belarus",
@@ -43,7 +43,7 @@ export const initialState: UsersPageType = {
         {
             id: v1(),
             firstname: "Hristich",
-            avatar: "https://goo.su/4zdi",
+            avatar: "https://goo.su/5jXv",
             followed: true,
             location: {
                 country: "Belarus",
@@ -54,9 +54,9 @@ export const initialState: UsersPageType = {
     ]
 }
 
-type ActionsType = ReturnType<typeof followAC> | ReturnType<typeof unfollowAC>
+export type UsersPageActionsType = ReturnType<typeof followAC> | ReturnType<typeof unfollowAC>
 
-export const usersReducer = (state = initialState, action: ActionsType): UsersPageType => {
+export const usersReducer = (state = initialState, action: UsersPageActionsType): UsersPageType => {
     switch (action.type) {
         case "FOLLOW":
             return {

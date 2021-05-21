@@ -1,14 +1,12 @@
 * {
     margin: 0;
     padding: 0;
-
 }
 
 .app-wrapper {
     display: grid;
-    margin: 0 auto;
+    margin: 20px auto;
     width: 1200px;
-    padding-top: 20px;
 
     grid-template-areas:
     "h h"
@@ -21,7 +19,7 @@
 
 .app-wrapper-content {
     grid-area: c;
+    width: 1000px;
     background-color: black;
-    padding-bottom: 20px;
     color: white;
 }

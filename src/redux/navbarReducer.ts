@@ -9,17 +9,19 @@ export type NavbarMenuType = {
     navbarItems: Array<NavbarType>
 }
 
-type ActionsType = {}
+export type NavbarActionsType = {}
+
 const initialState: NavbarMenuType = {
     navbarItems: [
         {id: v1(), title: "✓ Profile", path: "profile"},
         {id: v1(), title: "✉ Messages", path: "dialogs"},
         {id: v1(), title: "☖ News", path: "news"},
         {id: v1(), title: "♫ Music", path: "music"},
-        {id: v1(), title: "✱ Settings", path: "settings"}
+        {id: v1(), title: "✱ Settings", path: "settings"},
+        {id: v1(), title: "☯ Users", path: "users"}
     ]
 }
 
-export const navbarReducer = (state: NavbarMenuType = initialState, action: ActionsType) => {
+export const navbarReducer = (state: NavbarMenuType = initialState, action: NavbarActionsType) => {
     return state;
 }

@@ -1,6 +1,5 @@
 .content {
     display: grid;
-
     grid-template-areas:
     "h h"
     "l r";
