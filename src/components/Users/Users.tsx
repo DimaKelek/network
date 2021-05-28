@@ -5,12 +5,14 @@ import {UsersPagePropsType} from "./UsersContainer";
 import axios from "axios";
 
 export function Users(props: UsersPagePropsType) {
-
-    if(props.users.length === 0) {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-            props.setUsers(response.data.items)
-        })
+    const getUsers = () => {
+        if(props.users.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+                props.setUsers(response.data.items)
+            })
+        }
     }
+
 
     const users = props.users.map( u => {
         const followCallback = () => {
@@ -35,6 +37,7 @@ export function Users(props: UsersPagePropsType) {
     })
     return (
         <div className={S.users}>
+            <MyButton onClick={getUsers}>Get Users</MyButton>
             <h2 className={S.title}>Users</h2>
             {users}
         </div>

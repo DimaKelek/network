@@ -10,6 +10,7 @@ import {
     UsersPageType,
     UserType
 } from "../../redux/usersReducer";
+import {UsersC} from "./UsersС";
 
 type MapStatePropsType = UsersPageType
 type MapDispatchPropsType = {
@@ -34,4 +35,4 @@ const mapDispatchToProps = (dispatch: (action: UsersPageActionsType) => void): M
 }
 
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersC)
