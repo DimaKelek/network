@@ -1,24 +1,20 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import S from './MyPosts.module.css';
 import {Post} from "./Post/Post";
 import {MyPostsPropsType} from "./MyPostsContainer";
+import { MyButton } from '../../../Decoration/MyButton/MyButton';
 
 export function MyPosts(props: MyPostsPropsType) {
-
-    const newPost = React.createRef<HTMLTextAreaElement>()
-
-    const posts = props.posts.map( p => <Post key={p.id} id={p.id} message={p.message} />);
+    const posts = props.posts.map(p => <Post key={p.id} id={p.id} message={p.message}/>);
 
     //----callbacks---//
     const addPost = () => {
-        if(newPost.current) {
-            props.addPost()
-        }
+        props.addPost()
     }
 
-    const onPostChange = () => {
-        if(newPost.current) {
-            const newText = newPost.current.value
+    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        if (e.currentTarget) {
+            const newText = e.currentTarget.value
             props.updateNewPostText(newText)
         }
     }
@@ -28,19 +24,16 @@ export function MyPosts(props: MyPostsPropsType) {
                 <h3>My Posts</h3>
                 <div>
                     <textarea
-                        ref={newPost}
                         value={props.newPostText}
                         onChange={onPostChange}
                         placeholder="Что нового?)"
                     />
                 </div>
                 <div className={S.add}>
-                    <button onClick={addPost}>Add Post</button>
+                    <MyButton onClick={addPost}>Add Post</MyButton>
                 </div>
             </div>
-            <div className={S.posts}>
-                {posts}
-            </div>
+            <div className={S.posts}>{posts}</div>
         </div>
     );
 }

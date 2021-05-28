@@ -2,7 +2,6 @@
     padding: 20px 30px;
 }
 .user_box {
-    height: 135px;
     width: 560px;
     margin: 25px;
     box-shadow: 0 0 10px #2196f3;
@@ -10,7 +9,6 @@
     display: flex;
 }
 .avatar {
-    height: 135px;
     width: 95px;
     margin: 0 15px;
 }
@@ -24,7 +22,6 @@
 }
 .info {
     width: 435px;
-    height: 134px;
     padding: 1px;
 }
 .name {
