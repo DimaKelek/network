@@ -1,93 +1,68 @@
-import {v1} from "uuid";
-import {followAC, unfollowAC, UsersPageType, usersReducer} from "../usersReducer";
+import {followAC, setCheckedPageAC, setTotalCountAC, unfollowAC, UsersPageType, usersReducer} from "../usersReducer";
 
-const userID_1 = v1()
-const userID_2 = v1()
-const userID_3 = v1()
+let startState: UsersPageType ;
 
-test("the followed field must be changed to true", () => {
-    const startState: UsersPageType = {
+beforeEach(() => {
+    startState = {
         users: [
             {
-                id: userID_1,
-                firstname: "Vitalik",
-                avatar: "https://goo.su/4zdi",
-                followed: true,
-                location: {
-                    country: "Belarus",
-                    city: "Gomel"
+                name: "Vitalik",
+                id: 1,
+                uniqueUrlName: null,
+                photos: {
+                    small: null,
+                    large: null,
                 },
-                status: "Hello, i'm Vitalik"
+                status: null,
+                followed: true
             },
             {
-                id: userID_2,
-                firstname: "Ira",
-                avatar: "https://goo.su/4zdi",
-                followed: false,
-                location: {
-                    country: "Belarus",
-                    city: "Minsk"
+                name: "Ira",
+                id: 2,
+                uniqueUrlName: null,
+                photos: {
+                    small: null,
+                    large: null,
                 },
-                status: "Hello, i'm Ira"
+                status: null,
+                followed: true
             },
             {
-                id: userID_3,
-                firstname: "Hristich",
-                avatar: "https://goo.su/4zdi",
-                followed: true,
-                location: {
-                    country: "Belarus",
-                    city: "Vlavsk"
+                name: "Hristich",
+                id: 3,
+                uniqueUrlName: null,
+                photos: {
+                    small: null,
+                    large: null,
                 },
-                status: "Hello, i'm Hristich"
+                status: null,
+                followed: true
             },
-        ]
+        ],
+        totalCount: 0,
+        pageSize: 5,
+        checkedPage: 1,
+        maxRenderPages: 5,
+        minRenderPages: 0
     }
-    const endState = usersReducer(startState, followAC(userID_2))
+})
+
+test("the followed field must be changed to true", () => {
+    const endState = usersReducer(startState, followAC(2))
     expect(endState.users[1].followed).toBe(true)
 })
 
-test("the followed field must be changed to fales", () => {
-    const startState: UsersPageType = {
-        users: [
-            {
-                id: userID_1,
-                firstname: "Vitalik",
-                avatar: "https://goo.su/4zdi",
-                followed: true,
-                location: {
-                    country: "Belarus",
-                    city: "Gomel"
-                },
-                status: "Hello, i'm Vitalik"
-            },
-            {
-                id: userID_2,
-                firstname: "Ira",
-                avatar: "https://goo.su/4zdi",
-                followed: false,
-                location: {
-                    country: "Belarus",
-                    city: "Minsk"
-                },
-                status: "Hello, i'm Ira"
-            },
-            {
-                id: userID_3,
-                firstname: "Hristich",
-                avatar: "https://goo.su/4zdi",
-                followed: true,
-                location: {
-                    country: "Belarus",
-                    city: "Vlavsk"
-                },
-                status: "Hello, i'm Hristich"
-            },
-        ]
-    }
-
-    const endState_test_1 = usersReducer(startState, unfollowAC(userID_1))
-    const endState_test_2 = usersReducer(startState, unfollowAC(userID_3))
+test("the followed field must be changed to false", () => {
+    const endState_test_1 = usersReducer(startState, unfollowAC(1))
+    const endState_test_2 = usersReducer(startState, unfollowAC(3))
     expect(endState_test_1.users[0].followed).toBe(false)
     expect(endState_test_2.users[2].followed).toBe(false)
+})
+test("totalCount must be changed", () => {
+    const endState = usersReducer(startState, setTotalCountAC(10))
+    expect(endState.totalCount).toBe(10)
+})
+test("checkedPage must be changed", () => {
+    const endState = usersReducer(startState, setCheckedPageAC(2))
+    expect(endState.checkedPage).toBe(2)
 })
