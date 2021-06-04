@@ -36,6 +36,10 @@
     font-family: Comic Sans MS, Comic Sans, cursive;
     color: #fff;
     text-shadow: 0 0 0 1px #333333;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    word-break: break-all;
 }
 .follow_button {
     margin: 10px;

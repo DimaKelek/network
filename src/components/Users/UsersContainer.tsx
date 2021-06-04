@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Users} from "./Users";
+import {UsersAPIContainer} from "./UsersAPIContainer";
 import {AppStateType} from "../../redux/redux-store";
 import {
     followAC, setCheckedPageAC, setMaxRenderPageAC, setMinRenderPageAC, setTotalCountAC,
@@ -48,4 +48,4 @@ const mapDispatchToProps = (dispatch: (action: UsersPageActionsType) => void): M
 }
 
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIContainer)
