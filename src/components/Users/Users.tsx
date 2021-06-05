@@ -15,6 +15,7 @@ type UsersPresentationType = {
     follow: (id: number) => void
     previousButtonClick: () => void
     nextButtonClick: (pageQuantity: number) => void
+    isLoading: boolean
 }
 
 export function Users(props: UsersPresentationType) {
@@ -41,7 +42,7 @@ export function Users(props: UsersPresentationType) {
             u.followed ? props.unfollow(u.id) : props.follow(u.id)
         }
         return (
-            <div key={u.id} className={S.user_box}>
+            <div key={u.id} className={`${S.user_box} ${props.isLoading ? S.blurScreen : null}`}>
                 <div className={S.avatar}>
                     <img src={u.photos.small ? u.photos.small : "https://goo.su/4zdi"} alt="#"/>
                 </div>
@@ -59,7 +60,8 @@ export function Users(props: UsersPresentationType) {
     })
     return (
         <div className={S.users}>
-            <h2 className={S.title}>Users</h2>
+            {props.isLoading && <div className={S.preloader}><img src={"https://goo.su/5SAB"} alt="#"/></div>}
+            <h2 className={`${S.title} ${props.isLoading ? S.blurScreen : null}`}>Users</h2>
             {users}
             <div className={S.pageButtons_container}>
                 <div className={`${S.pageButton} ${props.checkedPage === 1 ? S.invisibleButton : null}`}

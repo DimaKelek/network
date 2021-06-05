@@ -17,6 +17,7 @@ export type UsersPageType = {
     checkedPage: number
     maxRenderPages: number
     minRenderPages: number
+    isLoading: boolean
 }
 
 export const initialState: UsersPageType = {
@@ -25,17 +26,19 @@ export const initialState: UsersPageType = {
     pageSize: 5,
     checkedPage: 1,
     maxRenderPages: 5,
-    minRenderPages: 0
+    minRenderPages: 0,
+    isLoading: false
 }
 
 export type UsersPageActionsType =
-    ReturnType<typeof followAC>
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setTotalCountAC>
-    | ReturnType<typeof setCheckedPageAC>
-    | ReturnType<typeof setMaxRenderPageAC>
-    | ReturnType<typeof setMinRenderPageAC>
+    ReturnType<typeof follow>
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setTotalCount>
+    | ReturnType<typeof setCheckedPage>
+    | ReturnType<typeof setMaxRenderPage>
+    | ReturnType<typeof setMinRenderPage>
+    | ReturnType<typeof setLoading>
 
 export const usersReducer = (state = initialState, action: UsersPageActionsType): UsersPageType => {
     switch (action.type) {
@@ -69,28 +72,33 @@ export const usersReducer = (state = initialState, action: UsersPageActionsType)
             return {...state, minRenderPages: action.minRenderPages}
         case "SET-MAX-RENDER-PAGE":
             return {...state, maxRenderPages: action.maxRenderPages}
+        case "SET-LOADING":
+            return {...state, isLoading: action.isLoading}
         default: return state
     }
 }
 
-export const followAC = (userID: number) => {
+export const follow = (userID: number) => {
     return {type: "FOLLOW", userID} as const
 }
-export const unfollowAC = (userID: number) => {
+export const unfollow = (userID: number) => {
     return {type: "UNFOLLOW", userID} as const
 }
-export const setUsersAC = (users: Array<UserType>) => {
+export const setUsers = (users: Array<UserType>) => {
     return {type: "SET-USERS", users} as const
 }
-export const setTotalCountAC = (totalCount: number) => {
+export const setTotalCount = (totalCount: number) => {
     return {type: "SET-TOTAL-COUNT", totalCount} as const
 }
-export const setCheckedPageAC = (checkedPage: number) => {
+export const setCheckedPage = (checkedPage: number) => {
     return {type: "SET-CHECKED-PAGE", checkedPage} as const
 }
-export const setMaxRenderPageAC = (maxRenderPages: number) => {
+export const setMaxRenderPage = (maxRenderPages: number) => {
     return {type: "SET-MAX-RENDER-PAGE", maxRenderPages} as const
 }
-export const setMinRenderPageAC = (minRenderPages: number) => {
+export const setMinRenderPage = (minRenderPages: number) => {
     return {type: "SET-MIN-RENDER-PAGE", minRenderPages} as const
+}
+export const setLoading = (isLoading: boolean) => {
+    return {type: "SET-LOADING", isLoading} as const
 }
