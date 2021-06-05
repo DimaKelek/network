@@ -3,17 +3,18 @@ import S from './Profile.module.css';
 import {ProfileHeader} from "./ProfileHeader/ProfileHeader";
 import {LeftColumn} from "./LeftColumn/LeftColumn";
 import {RightColumn} from './RightColumn/RightColumn';
+import {UserProfileType} from "../../redux/profileReducer";
 
 type ProfilePropsType = {
-
+    profile: UserProfileType
 }
 
 export function Profile(props: ProfilePropsType) {
     return (
         <div className={S.content}>
             <ProfileHeader />
-            <LeftColumn />
-            <RightColumn />
+            <LeftColumn profile={props.profile}/>
+            <RightColumn profile={props.profile}/>
         </div>
     );
 }
