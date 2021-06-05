@@ -15,7 +15,7 @@ export function MyPosts(props: MyPostsPropsType) {
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         if (e.currentTarget) {
             const newText = e.currentTarget.value
-            props.updateNewPostText(newText)
+            props.updateNewPost(newText)
         }
     }
     return (

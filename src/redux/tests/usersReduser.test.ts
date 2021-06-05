@@ -1,4 +1,12 @@
-import {follow, setCheckedPage, setTotalCount, unfollow, UsersPageType, usersReducer} from "../usersReducer";
+import {
+    follow,
+    setCheckedPage, setLoading,
+    setMaxRenderPage, setMinRenderPage,
+    setTotalCount,
+    unfollow,
+    UsersPageType,
+    usersReducer
+} from "../usersReducer";
 
 let startState: UsersPageType ;
 
@@ -66,4 +74,16 @@ test("totalCount must be changed", () => {
 test("checkedPage must be changed", () => {
     const endState = usersReducer(startState, setCheckedPage(2))
     expect(endState.checkedPage).toBe(2)
+})
+test("maxRenderPages must be changed", () => {
+    const endState = usersReducer(startState, setMaxRenderPage(10))
+    expect(endState.maxRenderPages).toBe(10)
+})
+test("minRenderPages must be changed", () => {
+    const endState = usersReducer(startState, setMinRenderPage(2))
+    expect(endState.minRenderPages).toBe(2)
+})
+test("isLoading must be changed", () => {
+    const endState = usersReducer(startState, setLoading(true))
+    expect(endState.isLoading).toBe(true)
 })

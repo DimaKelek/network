@@ -2,13 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../../../redux/redux-store';
 import {MyPosts} from './MyPosts';
-import {addPostAC, ProfilePageActionsType, ProfilePageType, updateNewPostAC} from "../../../../redux/profileReducer";
+import {addPost, PostType, updateNewPost} from "../../../../redux/profileReducer";
 
 
-type MapStatePropsType = ProfilePageType
+type MapStatePropsType = {
+    posts: Array<PostType>
+    newPostText: string
+}
 type MapDispatchPropsType = {
     addPost: () => void
-    updateNewPostText: (newText: string) => void
+    updateNewPost: (newText: string) => void
 }
 
 export type MyPostsPropsType = MapStatePropsType & MapDispatchPropsType
@@ -19,14 +22,6 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
         newPostText: state.profilePage.newPostText
     }
 }
-const mapDispatchToProps = (dispatch: (action: ProfilePageActionsType) => void): MapDispatchPropsType => {
-    return {
-        addPost: () => {
-           dispatch(addPostAC())
-        },
-        updateNewPostText: (newText: string) => {
-            dispatch(updateNewPostAC(newText))
-        }
-    }
-}
-export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+const dispatch: MapDispatchPropsType = {addPost, updateNewPost}
+
+export const MyPostsContainer = connect(mapStateToProps, dispatch)(MyPosts)
