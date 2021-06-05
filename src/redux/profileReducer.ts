@@ -31,7 +31,7 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
 
-    profile: UserProfileType
+    profile: UserProfileType | null
 }
 
 const initialState: ProfilePageType = {
@@ -41,28 +41,7 @@ const initialState: ProfilePageType = {
         {id: v1(), message: "What are you doing?"}
     ],
     newPostText: "",
-    profile: {
-        aboutMe: null,
-        contacts: {
-            facebook: null,
-            website: null,
-            vk: null,
-            twitter: null,
-            instagram: null,
-            youtube: null,
-            github: null,
-            mainLink: null,
-        },
-        lookingForAJob: false,
-        lookingForAJobDescription: null,
-        fullName: null,
-        userId: 0,
-        photos: {
-            small: null,
-            large: null,
-        }
-    }
-
+    profile: null
 }
 
 export type ProfilePageActionsType =
@@ -85,7 +64,11 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
             return {...state, newPostText: action.newText}
         }
         case "SET-NAME":
-            return {...state, profile: {...state.profile, fullName: action.fullName}}
+            if(state.profile) {
+                return {...state, profile: {...state.profile, fullName: action.fullName}}
+            } else {
+                return {...state}
+            }
         case "SET-USER-PROFILE":
             return {...state, profile: action.profile}
         default:

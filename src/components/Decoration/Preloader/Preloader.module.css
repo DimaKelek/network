@@ -21,3 +21,7 @@
         transform:rotate(360deg)
     }
 }
+
+.blurScreen {
+    filter: blur(2px);
+}

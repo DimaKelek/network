@@ -1,12 +1,16 @@
 import React from "react";
 import S from "./Description.module.css"
 import {UserProfileType} from "../../../../redux/profileReducer";
+import {Preloader} from "../../../Decoration/Preloader/Preloader";
 
 type DescriptionPropsType = {
-    profile: UserProfileType
+    profile: UserProfileType | null
 }
 
 export function Description(props: DescriptionPropsType) {
+    if(!props.profile) {
+        return <Preloader />
+    }
     return (
         <div className={S.description}>
             <div>

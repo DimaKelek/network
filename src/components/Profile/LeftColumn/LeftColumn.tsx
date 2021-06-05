@@ -5,7 +5,7 @@ import {Friends} from "./Friends/Friends";
 import {UserProfileType} from "../../../redux/profileReducer";
 
 type LeftColumnPropsType = {
-    profile: UserProfileType
+    profile: UserProfileType | null
 }
 export function LeftColumn(props: LeftColumnPropsType) {
     return (

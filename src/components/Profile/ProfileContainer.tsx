@@ -6,7 +6,7 @@ import {setName, setUserProfile, UserProfileType} from "../../redux/profileReduc
 import {Profile} from "./Profile";
 
 type MapStatePropsType = {
-    profile: UserProfileType
+    profile: UserProfileType | null
 }
 type MapDispatchPropsType = {
     setName: (fullName: string) => void

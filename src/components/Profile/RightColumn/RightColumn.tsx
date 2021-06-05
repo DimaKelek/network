@@ -5,7 +5,7 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {UserProfileType} from "../../../redux/profileReducer";
 
 type RightColumnPropsType = {
-    profile: UserProfileType
+    profile: UserProfileType | null
 }
 
 export function RightColumn(props: RightColumnPropsType) {

@@ -1,8 +1,10 @@
 import React from "react";
 import S from "./Users.module.css";
+import loader from "./../Decoration/Preloader/Preloader.module.css"
 import {MyButton} from "../Decoration/MyButton/MyButton";
 import {UserType} from "../../redux/usersReducer";
 import {Preloader} from "../Decoration/Preloader/Preloader";
+import {NavLink} from "react-router-dom";
 
 type UsersPresentationType = {
     totalCount: number
@@ -43,12 +45,16 @@ export function Users(props: UsersPresentationType) {
             u.followed ? props.unfollow(u.id) : props.follow(u.id)
         }
         return (
-            <div key={u.id} className={S.user_box}>
+            <div key={u.id} className={`${S.user_box} ${props.isLoading ? loader.blurScreen : null}`}>
                 <div className={S.avatar}>
-                    <img src={u.photos.small ? u.photos.small : "https://goo.su/4zdi"} alt="#"/>
+                    <NavLink to={"/profile/" + u.id}>
+                        <img src={u.photos.small ? u.photos.small : "https://goo.su/4zdi"} alt="#"/>
+                    </NavLink>
                 </div>
                 <div className={S.info}>
-                    <div className={S.name}>{u.name}</div>
+                    <NavLink to={"/profile/" + u.id}>
+                        <div className={S.name}>{u.name}</div>
+                    </NavLink>
                     <div className={S.status}>{u.status ? u.status : "No status"}</div>
                     <div className={S.follow_button}>
                         <MyButton onClick={followCallback}>
@@ -61,7 +67,7 @@ export function Users(props: UsersPresentationType) {
     })
     return (
         <div className={S.users}>
-            {props.isLoading && <Preloader />}
+            {props.isLoading && <Preloader/>}
             <h2 className={S.title}>Users</h2>
             {users}
             <div className={S.pageButtons_container}>

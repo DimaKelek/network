@@ -6,7 +6,7 @@ import {RightColumn} from './RightColumn/RightColumn';
 import {UserProfileType} from "../../redux/profileReducer";
 
 type ProfilePropsType = {
-    profile: UserProfileType
+    profile: UserProfileType | null
 }
 
 export function Profile(props: ProfilePropsType) {

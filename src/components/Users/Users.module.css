@@ -10,6 +10,9 @@
     border-radius: 10px;
     display: flex;
 }
+.user_box a {
+    text-decoration: none;
+}
 .avatar {
     width: 95px;
     margin: 0 15px;
