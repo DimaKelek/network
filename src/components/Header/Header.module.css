@@ -16,14 +16,15 @@
     height: 100px;
 }
 .title {
-    width: 70%;
-    text-align: center;
+    width: 55%;
     font-size: 60px;
+    text-align: center;
     font-family: Comic Sans MS, Comic Sans, cursive;
     color: #314547;
     text-transform: uppercase;
     letter-spacing: 5px;
     transition-duration: 1s;
+    margin: 0 40px;
 }
 .title span:hover {
     text-shadow: 0 0 10px #038ebc, 0 0 30px #038ebc, 0 0 80px #038ebc   ;

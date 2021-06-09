@@ -3,13 +3,11 @@ import S from './Header.module.css';
 import logo from '../../logo.jpg'
 import auth from '../../authLogo.jpg'
 import {NavLink} from "react-router-dom";
+import {AuthPropsType} from "./HeaderContainer";
 
-type HeaderPropsType = {
-    url: string
-}
 
-export function Header(props: HeaderPropsType) {
-    const title = props.url.split('').map( (l, i) => <span key={i}>{l}</span>)
+export function Header(props: AuthPropsType) {
+    const title = ("HELLO " + props.login).split('').map( (l, i) => <span key={i}>{l}</span>)
     return (
         <header className={S.header}>
             <div className={S.logo}>
