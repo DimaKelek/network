@@ -5,6 +5,7 @@ import {MyButton} from "../Decoration/MyButton/MyButton";
 import {UserType} from "../../redux/usersReducer";
 import {Preloader} from "../Decoration/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type UsersPresentationType = {
     totalCount: number
@@ -42,7 +43,30 @@ export function Users(props: UsersPresentationType) {
     })
     const users = props.users.map(u => {
         const followCallback = () => {
-            u.followed ? props.unfollow(u.id) : props.follow(u.id)
+            if(u.followed) {
+                axios.delete('https://social-network.samuraijs.com/api/1.0/follow/' + u.id, {
+                    withCredentials: true,
+                    headers: {
+                        "API-KEY": "4fe92c3a-1b95-46fb-8296-15a97f910aa4"
+                    }
+                }).then(response => {
+                    if(response.data.resultCode === 0) {
+                        props.unfollow(u.id)
+                    }
+                })
+            } else {
+                axios.post('https://social-network.samuraijs.com/api/1.0/follow/' + u.id, {}, {
+                    withCredentials: true,
+                    headers: {
+                        "API-KEY": "4fe92c3a-1b95-46fb-8296-15a97f910aa4"
+                    }
+                }).then(response => {
+                    if(response.data.resultCode === 0) {
+                        props.follow(u.id)
+                    }
+                })
+
+            }
         }
         return (
             <div key={u.id} className={`${S.user_box} ${props.isLoading ? loader.blurScreen : null}`}>
