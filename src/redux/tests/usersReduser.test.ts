@@ -52,7 +52,8 @@ beforeEach(() => {
         checkedPage: 1,
         maxRenderPages: 5,
         minRenderPages: 0,
-        isLoading: false
+        isLoading: false,
+        followInProgress: []
     }
 })
 

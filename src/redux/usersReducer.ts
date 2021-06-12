@@ -18,6 +18,7 @@ export type UsersPageType = {
     maxRenderPages: number
     minRenderPages: number
     isLoading: boolean
+    followInProgress: number[]
 }
 
 export const initialState: UsersPageType = {
@@ -27,7 +28,8 @@ export const initialState: UsersPageType = {
     checkedPage: 1,
     maxRenderPages: 5,
     minRenderPages: 0,
-    isLoading: false
+    isLoading: false,
+    followInProgress: []
 }
 
 export type UsersPageActionsType =
@@ -39,6 +41,7 @@ export type UsersPageActionsType =
     | ReturnType<typeof setMaxRenderPage>
     | ReturnType<typeof setMinRenderPage>
     | ReturnType<typeof setLoading>
+    | ReturnType<typeof setFollowInProgress>
 
 export const usersReducer = (state = initialState, action: UsersPageActionsType): UsersPageType => {
     switch (action.type) {
@@ -74,6 +77,13 @@ export const usersReducer = (state = initialState, action: UsersPageActionsType)
             return {...state, maxRenderPages: action.maxRenderPages}
         case "SET-LOADING":
             return {...state, isLoading: action.isLoading}
+        case "SET-FOLLOW-IN-PROGRESS":
+            return {
+                ...state,
+                followInProgress: action.isLoading
+                    ? [...state.followInProgress, action.userID]
+                    : state.followInProgress.filter(id => id !== action.userID)
+            }
         default: return state
     }
 }
@@ -101,4 +111,7 @@ export const setMinRenderPage = (minRenderPages: number) => {
 }
 export const setLoading = (isLoading: boolean) => {
     return {type: "SET-LOADING", isLoading} as const
+}
+export const setFollowInProgress = (userID: number, isLoading: boolean) => {
+    return {type: "SET-FOLLOW-IN-PROGRESS", userID, isLoading} as const
 }

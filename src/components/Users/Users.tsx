@@ -5,7 +5,7 @@ import {MyButton} from "../Decoration/MyButton/MyButton";
 import {UserType} from "../../redux/usersReducer";
 import {Preloader} from "../Decoration/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 type UsersPresentationType = {
     totalCount: number
@@ -20,6 +20,9 @@ type UsersPresentationType = {
     previousButtonClick: () => void
     nextButtonClick: (pageQuantity: number) => void
     isLoading: boolean
+    setLoading: (isLoading: boolean) => void
+    followInProgress: number[]
+    setFollowInProgress: (userID: number, isLoading: boolean) => void
 }
 
 export function Users(props: UsersPresentationType) {
@@ -44,26 +47,16 @@ export function Users(props: UsersPresentationType) {
     const users = props.users.map(u => {
         const followCallback = () => {
             if(u.followed) {
-                axios.delete('https://social-network.samuraijs.com/api/1.0/follow/' + u.id, {
-                    withCredentials: true,
-                    headers: {
-                        "API-KEY": "4fe92c3a-1b95-46fb-8296-15a97f910aa4"
-                    }
-                }).then(response => {
-                    if(response.data.resultCode === 0) {
-                        props.unfollow(u.id)
-                    }
+                props.setFollowInProgress(u.id, true)
+                usersAPI.unfollowUser(u.id).then(data => {
+                    data.resultCode === 0 && props.unfollow(u.id)
+                    props.setFollowInProgress(u.id, false)
                 })
             } else {
-                axios.post('https://social-network.samuraijs.com/api/1.0/follow/' + u.id, {}, {
-                    withCredentials: true,
-                    headers: {
-                        "API-KEY": "4fe92c3a-1b95-46fb-8296-15a97f910aa4"
-                    }
-                }).then(response => {
-                    if(response.data.resultCode === 0) {
-                        props.follow(u.id)
-                    }
+                props.setFollowInProgress(u.id, true)
+                usersAPI.followUser(u.id).then(data => {
+                    data.resultCode === 0 && props.follow(u.id)
+                    props.setFollowInProgress(u.id, false)
                 })
 
             }
@@ -81,7 +74,10 @@ export function Users(props: UsersPresentationType) {
                     </NavLink>
                     <div className={S.status}>{u.status ? u.status : "No status"}</div>
                     <div className={S.follow_button}>
-                        <MyButton onClick={followCallback}>
+                        <MyButton
+                            disabled={props.followInProgress.some(id => id === u.id)}
+                            onClick={followCallback}
+                        >
                             {u.followed ? "Unfollow" : "Follow"}
                         </MyButton>
                     </div>
