@@ -5,7 +5,6 @@ import {MyButton} from "../Decoration/MyButton/MyButton";
 import {UserType} from "../../redux/usersReducer";
 import {Preloader} from "../Decoration/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
 
 type UsersPresentationType = {
     totalCount: number
@@ -47,18 +46,9 @@ export function Users(props: UsersPresentationType) {
     const users = props.users.map(u => {
         const followCallback = () => {
             if(u.followed) {
-                props.setFollowInProgress(u.id, true)
-                usersAPI.unfollowUser(u.id).then(data => {
-                    data.resultCode === 0 && props.unfollow(u.id)
-                    props.setFollowInProgress(u.id, false)
-                })
+                props.unfollow(u.id)
             } else {
-                props.setFollowInProgress(u.id, true)
-                usersAPI.followUser(u.id).then(data => {
-                    data.resultCode === 0 && props.follow(u.id)
-                    props.setFollowInProgress(u.id, false)
-                })
-
+                props.follow(u.id)
             }
         }
         return (

@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {Dispatch} from "react";
+import {usersAPI} from "../api/api";
 
 export type PostType = {
     id: string
@@ -87,4 +89,10 @@ export const setName = (fullName: string) => {
 }
 export const setUserProfile = (profile: UserProfileType) => {
     return {type: "SET-USER-PROFILE", profile} as const
+}
+
+export const getProfile = (userID: string) => {
+    return (dispatch: Dispatch<ProfilePageActionsType>) => {
+        usersAPI.getProfile(userID).then(response => dispatch(setUserProfile(response)))
+    }
 }

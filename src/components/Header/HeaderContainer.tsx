@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {Dispatch} from 'react';
 import {Header} from "./Header";
 import {connect} from "react-redux";
-import {setUserData} from "../../redux/auth-reducer";
+import {AuthActionType, getAuth, setUserData} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/redux-store";
-import {usersAPI} from "../../api/api";
 
 
 type MapDispatchPropsType = {
     setUserData: (userId: number, email: string, login: string) => void
+    getAuth: () => (dispatch: Dispatch<AuthActionType>) => void
 }
 type MapStatePropsType = {
     isAuth: boolean
@@ -18,12 +18,7 @@ export type AuthPropsType = MapStatePropsType & MapDispatchPropsType
 
 class HeaderContainer extends React.Component<AuthPropsType> {
     componentDidMount() {
-        usersAPI.authUser().then(data => {
-            if (data.resultCode === 0) {
-                let {id, email, login} = data.data
-                this.props.setUserData(id, email, login)
-            }
-        })
+        this.props.getAuth()
     }
 
     render() {
@@ -37,6 +32,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
         login: state.auth.login
     }
 }
-const dispatch: MapDispatchPropsType = {setUserData}
+const dispatch: MapDispatchPropsType = {setUserData, getAuth}
 
+// @ts-ignore
 export default connect(mapStateToProps, dispatch)(HeaderContainer)

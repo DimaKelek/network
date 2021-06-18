@@ -1,3 +1,8 @@
+import {usersAPI} from "../api/api";
+import {AppDispatch} from "./redux-store";
+import {Dispatch} from "react";
+import { ThunkAction } from "redux-thunk";
+
 export type PhotosType = {
     small: string | null
     large: string | null
@@ -33,8 +38,8 @@ export const initialState: UsersPageType = {
 }
 
 export type UsersPageActionsType =
-    ReturnType<typeof follow>
-    | ReturnType<typeof unfollow>
+    ReturnType<typeof followSuccess>
+    | ReturnType<typeof unfollowSuccess>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setTotalCount>
     | ReturnType<typeof setCheckedPage>
@@ -88,10 +93,10 @@ export const usersReducer = (state = initialState, action: UsersPageActionsType)
     }
 }
 
-export const follow = (userID: number) => {
+export const followSuccess = (userID: number) => {
     return {type: "FOLLOW", userID} as const
 }
-export const unfollow = (userID: number) => {
+export const unfollowSuccess = (userID: number) => {
     return {type: "UNFOLLOW", userID} as const
 }
 export const setUsers = (users: Array<UserType>) => {
@@ -114,4 +119,41 @@ export const setLoading = (isLoading: boolean) => {
 }
 export const setFollowInProgress = (userID: number, isLoading: boolean) => {
     return {type: "SET-FOLLOW-IN-PROGRESS", userID, isLoading} as const
+}
+
+
+// export type ThunkActionType<R, S, E, A extends Action> = (
+//     dispatch: ThunkDispatch<S, E, A>,
+//     getState: () => S,
+//     extraArgument: E) => R
+
+export const getUsers = (checkedPage: number, pageSize: number) => {
+    return (dispatch: Dispatch<UsersPageActionsType>) => {
+        dispatch(setLoading(true))
+        usersAPI.getUsers(checkedPage, pageSize).then(data => {
+            dispatch(setLoading(false))
+            dispatch(setUsers(data.items))
+            dispatch(setTotalCount(data.totalCount))
+        })
+    }
+}
+
+export const follow = (userID: number) => {
+    return (dispatch: Dispatch<UsersPageActionsType>) => {
+        dispatch(setFollowInProgress(userID, true))
+        usersAPI.followUser(userID).then(data => {
+            data.resultCode === 0 && dispatch(followSuccess(userID))
+            dispatch(setFollowInProgress(userID, false))
+        })
+    }
+}
+
+export const unfollow = (userID: number) => {
+    return (dispatch: Dispatch<UsersPageActionsType>) => {
+        dispatch(setFollowInProgress(userID, true))
+        usersAPI.unfollowUser(userID).then(data => {
+            data.resultCode === 0 && dispatch(unfollowSuccess(userID))
+            dispatch(setFollowInProgress(userID, false))
+        })
+    }
 }

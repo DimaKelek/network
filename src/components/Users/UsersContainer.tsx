@@ -1,21 +1,22 @@
-import React from "react";
+import React, {Dispatch} from "react";
 import {connect} from "react-redux";
-import {AppStateType} from "../../redux/redux-store";
-import {follow, setCheckedPage, setFollowInProgress, setLoading,
-    setMaxRenderPage, setMinRenderPage, setTotalCount,
-    setUsers, unfollow, UsersPageType, UserType} from "../../redux/usersReducer";
-import {usersAPI} from "../../api/api";
+import {AppDispatch, AppStateType} from "../../redux/redux-store";
+import {
+    follow,
+    followSuccess, getUsers, setCheckedPage, setFollowInProgress,
+    setLoading, setMaxRenderPage, setMinRenderPage, unfollow,
+    unfollowSuccess, UsersPageActionsType, UsersPageType
+} from "../../redux/usersReducer";
 import {Users} from "./Users";
 
 type MapStatePropsType = UsersPageType
 type MapDispatchPropsType = {
-    follow: (userID: number) => void
-    unfollow: (userID: number) => void
-    setUsers: (users: Array<UserType>) => void
-    setTotalCount: (totalCount: number) => void
     setCheckedPage: (checkedPage: number) => void
     setLoading: (isLoading: boolean) => void
     setFollowInProgress: (userID: number, isLoading: boolean) => void
+    getUsers: (checkedPage: number, pageSize: number) => (dispatch: Dispatch<UsersPageActionsType>) => void
+    follow: (userID: number) => (dispatch: Dispatch<UsersPageActionsType>) => void
+    unfollow: (userID: number) => (dispatch: Dispatch<UsersPageActionsType>) => void
 
     setMinRenderPage: (minRenderPage: number) => void
     setMaxRenderPage: (maxRenderPage: number) => void
@@ -25,22 +26,12 @@ export type UsersPagePropsType = MapStatePropsType & MapDispatchPropsType
 
 class UsersContainer extends React.Component<UsersPagePropsType> {
     componentDidMount() {
-        this.props.setLoading(true)
-        usersAPI.getUsers(this.props.checkedPage, this.props.pageSize).then(data => {
-            this.props.setLoading(false)
-            this.props.setUsers(data.items)
-            this.props.setTotalCount(data.totalCount)
-        })
+        this.props.getUsers(this.props.checkedPage, this.props.pageSize)
     }
 
     pageButtonClick = (pageNumber: number) => {
         this.props.setCheckedPage(pageNumber)
-        this.props.setLoading(true)
-        usersAPI.getUsers(pageNumber, this.props.pageSize)
-            .then(data => {
-                this.props.setLoading(false)
-                this.props.setUsers(data.items)
-            })
+        this.props.getUsers(pageNumber, this.props.pageSize)
     }
     previousButtonClick = () => {
         this.props.setCheckedPage(this.props.checkedPage - 1)
@@ -71,14 +62,14 @@ class UsersContainer extends React.Component<UsersPagePropsType> {
                 checkedPage={this.props.checkedPage}
                 pageButtonClick={this.pageButtonClick}
                 users={this.props.users}
-                unfollow={this.props.unfollow}
-                follow={this.props.follow}
                 previousButtonClick={this.previousButtonClick}
                 nextButtonClick={this.nextButtonClick}
                 isLoading={this.props.isLoading}
                 setLoading={this.props.setLoading}
                 followInProgress={this.props.followInProgress}
                 setFollowInProgress={this.props.setFollowInProgress}
+                follow={this.props.follow}
+                unfollow={this.props.unfollow}
             />
         );
     }
@@ -98,9 +89,9 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 
 const dispatch: MapDispatchPropsType = {
-    follow, unfollow, setUsers, setTotalCount,
     setCheckedPage, setMinRenderPage, setMaxRenderPage,
-    setLoading, setFollowInProgress
+    setLoading, setFollowInProgress, getUsers, follow, unfollow
 }
 
+// @ts-ignore
 export default connect(mapStateToProps, dispatch)(UsersContainer)

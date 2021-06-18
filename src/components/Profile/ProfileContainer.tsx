@@ -1,10 +1,9 @@
-import React from "react";
+import React, {Dispatch} from "react";
 import {connect} from "react-redux";
-import axios from "axios";
 import {AppStateType} from "../../redux/redux-store";
-import {setName, setUserProfile, UserProfileType} from "../../redux/profileReducer";
+import {getProfile, ProfilePageActionsType, setName, setUserProfile, UserProfileType} from "../../redux/profileReducer";
 import {Profile} from "./Profile";
-import {RouteComponentProps, withRouter } from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
 type PathParamsType = {
     userId: string
@@ -16,6 +15,7 @@ type MapStatePropsType = {
 type MapDispatchPropsType = {
     setName: (fullName: string) => void
     setUserProfile: (profile: UserProfileType) => void
+    getProfile: (userID: string) => (dispatch: Dispatch<ProfilePageActionsType>) => void
 }
 
 export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
@@ -24,13 +24,8 @@ type MainProfilePropsType = RouteComponentProps<PathParamsType> & ProfilePropsTy
 class ProfileContainer extends React.Component<MainProfilePropsType> {
     componentDidMount() {
         let userID = this.props.match.params.userId
-        if(!userID) {
-            userID = "2"
-        }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userID)
-            .then(response => {
-                this.props.setUserProfile(response.data)
-            })
+        if(!userID) {userID = "2"}
+        this.props.getProfile(userID)
     }
 
     render() {
@@ -44,8 +39,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-const dispatch: MapDispatchPropsType = {setName, setUserProfile}
+const dispatch: MapDispatchPropsType = {setName, setUserProfile, getProfile}
 
-const WithRouterContainer = withRouter(ProfileContainer)
-
-export default connect(mapStateToProps, dispatch)(WithRouterContainer)
+// @ts-ignore
+export default connect(mapStateToProps, dispatch)(withRouter(ProfileContainer))
