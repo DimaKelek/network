@@ -14,9 +14,9 @@ type MapDispatchPropsType = {
     setCheckedPage: (checkedPage: number) => void
     setLoading: (isLoading: boolean) => void
     setFollowInProgress: (userID: number, isLoading: boolean) => void
-    getUsers: (checkedPage: number, pageSize: number) => (dispatch: Dispatch<UsersPageActionsType>) => void
-    follow: (userID: number) => (dispatch: Dispatch<UsersPageActionsType>) => void
-    unfollow: (userID: number) => (dispatch: Dispatch<UsersPageActionsType>) => void
+    getUsers: (checkedPage: number, pageSize: number) => void
+    follow: (userID: number) => void
+    unfollow: (userID: number) => void
 
     setMinRenderPage: (minRenderPage: number) => void
     setMaxRenderPage: (maxRenderPage: number) => void
@@ -93,5 +93,5 @@ const dispatch: MapDispatchPropsType = {
     setLoading, setFollowInProgress, getUsers, follow, unfollow
 }
 
-// @ts-ignore
-export default connect(mapStateToProps, dispatch)(UsersContainer)
+export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>
+(mapStateToProps, dispatch)(UsersContainer)
