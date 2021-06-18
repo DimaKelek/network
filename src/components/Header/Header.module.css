@@ -2,6 +2,7 @@
     grid-area: h;
     background-color: black;
     display: flex;
+
     position: relative;
 }
 
@@ -17,7 +18,7 @@
 }
 .title {
     width: 55%;
-    font-size: 60px;
+    font-size: 50px;
     text-align: center;
     font-family: Comic Sans MS, Comic Sans, cursive;
     font-weight: bold;

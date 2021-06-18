@@ -4,6 +4,7 @@ import {DialogItem} from "./Dialog/DialogItem";
 import {Message} from "./Messages/MessageItem";
 import {DialogsPagePropsType} from "./DialogsContainer";
 import { MyButton } from "../Decoration/MyButton/MyButton";
+import { Redirect } from "react-router-dom";
 
 export function Dialogs(props: DialogsPagePropsType) {
     const dialogs = props.dialogs.map( d => <DialogItem key={d.id} id={d.id} name={d.name} />);
@@ -21,6 +22,11 @@ export function Dialogs(props: DialogsPagePropsType) {
             props.onMessageChange(newText)
         }
     }
+
+    if(!props.isAuth) {
+        return <Redirect to="/login"/>
+    }
+
     return (
         <div className={S.dialogs}>
             <div className={S.dialogs_box}>

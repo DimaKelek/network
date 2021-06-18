@@ -30,7 +30,7 @@ const initialState: DialogPageType = {
     newMessageText: ""
 }
 
-export type DialogsPageActionsType = ReturnType<typeof addMessageAC> | ReturnType<typeof updateMessageTextAC>
+export type DialogsPageActionsType = ReturnType<typeof sendMessage> | ReturnType<typeof onMessageChange>
 
 export const dialogsReducer = (state: DialogPageType = initialState, action: DialogsPageActionsType): DialogPageType => {
     switch (action.type) {
@@ -49,9 +49,9 @@ export const dialogsReducer = (state: DialogPageType = initialState, action: Dia
     }
 }
 
-export const addMessageAC = () => {
+export const sendMessage = () => {
     return {type: "SEND_MESSAGE"} as const
 }
-export const updateMessageTextAC = (newText: string) => {
+export const onMessageChange = (newText: string) => {
     return {type: "UPDATE-NEW-MESSAGE-TEXT", newText: newText} as const
 }

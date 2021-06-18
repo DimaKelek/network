@@ -1,4 +1,4 @@
-import {usersAPI} from "../api/api";
+import {authAPI, usersAPI} from "../api/api";
 import {Dispatch} from "react";
 
 export type AuthActionType = ReturnType<typeof setUserData>
@@ -36,7 +36,7 @@ export const setUserData = (userId: number, email: string, login: string) => {
 
 export const getAuth = () => {
     return (dispatch: Dispatch<AuthActionType>) => {
-        usersAPI.authUser().then(data => {
+        authAPI.me().then(data => {
             if (data.resultCode === 0) {
                 let {id, email, login} = data.data
                 dispatch(setUserData(id, email, login))

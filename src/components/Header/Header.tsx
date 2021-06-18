@@ -7,7 +7,8 @@ import {AuthPropsType} from "./HeaderContainer";
 
 
 export function Header(props: AuthPropsType) {
-    const title = ("HELLO " + props.login).split('').map( (l, i) => <span key={i}>{l}</span>)
+    const title = (props.login !== null ? "HELLO " + props.login : "No authorization")
+        .split('').map( (l, i) => <span key={i}>{l}</span>)
     return (
         <header className={S.header}>
             <div className={S.logo}>
@@ -16,7 +17,7 @@ export function Header(props: AuthPropsType) {
             <div className={S.title}>
                 {title}
             </div>
-            <NavLink to="/auth">
+            <NavLink to="/login">
                 <div className={S.auth}>
                     <img src={auth} alt="auth"/>
                 </div>

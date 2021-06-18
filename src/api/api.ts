@@ -16,10 +16,13 @@ export const usersAPI = {
     unfollowUser(userID: number) {
         return instance.delete(`follow/${userID}`).then(response => response.data)
     },
-    authUser() {
-        return instance.get(`auth/me`).then(response => response.data)
-    },
     getProfile(userID: string) {
         return instance.get(`profile/` + userID).then(response => response.data)
     }
+}
+
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`).then(response => response.data)
+    },
 }
