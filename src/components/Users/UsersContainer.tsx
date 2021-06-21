@@ -8,6 +8,8 @@ import {
     unfollowSuccess, UsersPageActionsType, UsersPageType
 } from "../../redux/usersReducer";
 import {Users} from "./Users";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../Hoc/withAuthRedirect";
 
 type MapStatePropsType = UsersPageType
 type MapDispatchPropsType = {
@@ -93,5 +95,7 @@ const dispatch: MapDispatchPropsType = {
     setLoading, setFollowInProgress, getUsers, follow, unfollow
 }
 
-export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>
-(mapStateToProps, dispatch)(UsersContainer)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, dispatch),
+    withAuthRedirect
+)(UsersContainer)
