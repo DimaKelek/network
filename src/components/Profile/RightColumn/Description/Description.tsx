@@ -2,6 +2,7 @@ import React from "react";
 import S from "./Description.module.css"
 import {UserProfileType} from "../../../../redux/profileReducer";
 import {Preloader} from "../../../Decoration/Preloader/Preloader";
+import { Status } from "./Status/Status";
 
 type DescriptionPropsType = {
     profile: UserProfileType | null
@@ -19,10 +20,7 @@ export function Description(props: DescriptionPropsType) {
                     <span className={S.information}>{props.profile.fullName
                         ? props.profile.fullName : "Information is not defined"}</span>
                 </div>
-                <div className={`${S.title_container} ${S.status}`}>
-                    <span className={S.title}>Статуc: </span>
-                    <span className={S.information}>{props.profile.aboutMe ? props.profile.aboutMe : "No status"}</span>
-                </div>
+                <Status status={props.profile.aboutMe}/>
                 <div className={S.title_container}>
                     <span className={S.title}>Поиск работы: </span>
                     <span className={S.information}>{props.profile.lookingForAJobDescription

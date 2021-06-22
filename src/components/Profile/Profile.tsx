@@ -14,7 +14,9 @@ export function Profile(props: ProfilePropsType) {
         <div className={S.content}>
             <ProfileHeader />
             <LeftColumn profile={props.profile}/>
-            <RightColumn profile={props.profile}/>
+            <RightColumn
+                profile={props.profile}
+            />
         </div>
     );
 }

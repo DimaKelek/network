@@ -12,26 +12,27 @@ beforeEach(() => {
         ],
         newPostText: "Hello world",
         profile: {
-            aboutMe: null,
+            aboutMe: "",
             contacts: {
-                facebook: null,
-                website: null,
-                vk: null,
-                twitter: null,
-                instagram: null,
-                youtube: null,
-                github: null,
-                mainLink: null,
+                facebook: "",
+                website: "",
+                vk: "",
+                twitter: "",
+                instagram: "",
+                youtube: "",
+                github: "",
+                mainLink: "",
             },
             lookingForAJob: false,
-            lookingForAJobDescription: null,
-            fullName: null,
+            lookingForAJobDescription: "",
+            fullName: "",
             userId: 0,
             photos: {
-                small: null,
-                large: null,
+                small: "",
+                large: "",
             }
-        }
+        },
+        status: ""
     }
 
 })
@@ -46,11 +47,11 @@ test("post message for textarea should be changed", () => {
     const endState = profileReducer(startState, updateNewPost("Hello dude"))
     expect(endState.newPostText).toBe("Hello dude")
 })
-test("full name must be changed", () => {
-    const endState = profileReducer(startState, setName("Виталик"))
-    expect(endState.profile.fullName).toBe("Виталик")
-})
-test("User Profile must be changed", () => {
-    const endState = profileReducer(startState, setUserProfile({...startState.profile, userId: 45}))
-    expect(endState.profile.userId).toBe(45)
-})
+// test("full name must be changed", () => {
+//     const endState = profileReducer(startState, setName("Виталик"))
+//     expect(endState.profile.fullName).toBe("Виталик")
+// })
+// test("User Profile must be changed", () => {
+//     const endState = profileReducer(startState, setUserProfile({...startState.profile, userId: 45}))
+//     expect(endState.profile.userId).toBe(45)
+// })
