@@ -1,7 +1,5 @@
 import {usersAPI} from "../api/api";
-import {AppDispatch} from "./redux-store";
 import {Dispatch} from "react";
-import { ThunkAction } from "redux-thunk";
 
 export type PhotosType = {
     small: string | null

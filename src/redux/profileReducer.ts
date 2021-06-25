@@ -102,26 +102,22 @@ export const setProfileStatus = (status: string) => {
 export const getProfile = (userID: string) => {
     return (dispatch: Dispatch<ProfilePageActionsType>) => {
         profileAPI.getProfile(userID).then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setUserProfile(response))
-            }
+            dispatch(setUserProfile(response))
         })
     }
 }
 export const getStatus = (userID: string) => {
     return (dispatch: Dispatch<ProfilePageActionsType>) => {
         profileAPI.getStatus(userID).then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setProfileStatus(response.data))
-            }
+            dispatch(setProfileStatus(response.data))
         })
     }
 }
 export const updateStatus = (status: string) => {
     return (dispatch: Dispatch<ProfilePageActionsType>) => {
-        profileAPI.getStatus(status).then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setProfileStatus(response.data))
+        profileAPI.updateStatus(status).then(response => {
+            if (response.resultCode === 0) {
+                dispatch(setProfileStatus(status))
             }
         })
     }
