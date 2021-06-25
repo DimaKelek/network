@@ -9,14 +9,18 @@ type MyButtonPropsType = DefaultButtonPropsType & {
     onClick?: () => void
 }
 
-export const MyButton: React.FC<MyButtonPropsType> = ({title, disabled, children, onClick, ...restProps}) => {
+export const MyButton: React.FC<MyButtonPropsType> = props => {
+    const {title, disabled, children, onClick, className, ...restProps} = props
+
     const onclickCallback = () => {
         onClick && onClick()
     }
+
+    const style = `${S.button} ${className}`
     return (
-        <div className={S.button_box}>
+        <>
             <button
-                className={S.button}
+                className={style}
                 onClick={onclickCallback}
                 disabled={disabled}
 
@@ -24,6 +28,6 @@ export const MyButton: React.FC<MyButtonPropsType> = ({title, disabled, children
             >
                 {children ? children : title}
             </button>
-        </div>
+        </>
     );
 }

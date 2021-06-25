@@ -31,11 +31,13 @@ export function Dialogs(props: DialogsPagePropsType) {
                 {messages}
             </div>
             <div className={S.addMessage_box}>
-                <div><textarea
-                    ref={newMessage}
-                    value={props.newMessageText}
-                    onChange={onMessageChange}
-                    placeholder="Enter your message!!!"/>
+                <div>
+                    <textarea
+                        ref={newMessage}
+                        value={props.newMessageText}
+                        onChange={onMessageChange}
+                        placeholder="Enter your message!!!"
+                    />
                 </div>
                 <MyButton onClick={sendMessage}>Send</MyButton>
             </div>

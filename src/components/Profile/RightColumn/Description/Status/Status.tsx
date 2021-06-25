@@ -1,5 +1,6 @@
 import React, {ChangeEvent} from "react";
-import S from "../Description.module.css";
+import S from "./Status.module.css";
+import {SuperInput} from "../../../../Decoration/SuperInput/SuperInput";
 
 type StatusPropsType = {
     status: string
@@ -39,15 +40,14 @@ export class Status extends React.Component<StatusPropsType> {
 
     render() {
         return (
-            <div className={`${S.title_container} ${S.status}`}>
-                <span className={S.title}>Статуc: </span>
+            <div className={S.status}>
                 {!this.state.editMode &&
-                    <span onDoubleClick={this.activateEditMode}
-                        className={S.information}>{this.props.status || "No status"}
-                    </span>
+                    <div onDoubleClick={this.activateEditMode}
+                        className={S.title}>{this.props.status || "No status"}
+                    </div>
                 }
                 {this.state.editMode &&
-                    <input
+                    <SuperInput
                         autoFocus
                         onChange={this.onChangeStatus}
                         onBlur={this.deactivateEditMode}

@@ -16,21 +16,10 @@ export function Description(props: DescriptionPropsType) {
     }
     return (
         <div className={S.description}>
-            <div>
-                <div className={S.title_container}>
-                    <span className={S.title}>Имя: </span>
-                    <span className={S.information}>
-                        {props.profile.fullName || "Information is not defined"}
-                    </span>
-                </div>
-                <Status status={props.status} updateStatus={props.updateStatus}/>
-                <div className={S.title_container}>
-                    <span className={S.title}>Поиск работы: </span>
-                    <span className={S.information}>
-                        {props.profile.lookingForAJobDescription || "Information is not defined"}
-                    </span>
-                </div>
+            <div className={S.name}>
+                {props.profile.fullName || "Information is not defined"}
             </div>
+            <Status status={props.status} updateStatus={props.updateStatus}/>
         </div>
     );
 }

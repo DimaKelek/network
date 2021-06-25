@@ -1,0 +1,17 @@
+.status {
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    word-break: break-all;
+    text-shadow: 0 0 0 1px #333333;
+    color: #acacac;
+    font-size: 14px;
+}
+
+.status:hover {
+    cursor: pointer;
+}
+
+.title {
+    padding: 10px 0 10px 15px;
+}

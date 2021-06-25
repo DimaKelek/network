@@ -1,0 +1,68 @@
+.option {
+    display: block;
+    margin-bottom: 0.25em;
+}
+
+/*------checkbox----*/
+.check {
+    padding-left: 10px;
+}
+.checkInput {
+    position: absolute;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.checkbox {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    box-shadow: 0 0 0 1px #000000;
+    position: relative;
+    margin-right: 10px;
+    border-radius: 2px;
+    background-color: #333333;
+}
+
+.checkbox::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.6875em;
+    height: 0.6875em;
+    background-color: #000000;
+    background-image: url("./check-removebg.png");
+    background-repeat: no-repeat;
+    background-size: 0.6875em 0.6875em;
+    opacity: 0;
+    transition: .2s;
+    border-radius: 2px;
+}
+
+.checkInput:checked + .checkbox::before {
+    opacity: 1;
+}
+
+.checkInput:focus + .checkbox {
+    box-shadow:
+            0 0 0 1px #000000,
+            0 0 0 2px #2196f3;
+}
+
+.checkInput:disabled + .checkbox {
+    background-color: #7d7b7b;
+    box-shadow: 0 0 0 1px #7d7b7b;
+}
+.checkInput:disabled + .checkbox::before {
+    background-color: #7d7b7b;
+}
+
+/*------label----*/
+
+.labelText {
+    font-size: 16px;
+}
