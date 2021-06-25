@@ -3,7 +3,6 @@ import {v1} from "uuid";
 export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageText: string
 }
 export type DialogType = {
     id: string
@@ -26,32 +25,27 @@ const initialState: DialogPageType = {
         {id: v1(), message: "Hi"},
         {id: v1(), message: "How are you?"},
         {id: v1(), message: "What are you doing?"}
-    ],
-    newMessageText: ""
+    ]
 }
 
-export type DialogsPageActionsType = ReturnType<typeof sendMessage> | ReturnType<typeof onMessageChange>
+export type DialogsPageActionsType = ReturnType<typeof sendMessage>
 
 export const dialogsReducer = (state: DialogPageType = initialState, action: DialogsPageActionsType): DialogPageType => {
     switch (action.type) {
         case "SEND_MESSAGE": {
-            let newMessage: MessageType = {id: v1(), message: state.newMessageText}
+            let newMessage: MessageType = {
+                id: v1(),
+                message: action.newMessage
+            }
             return {
                 ...state,
                 messages: [...state.messages, newMessage],
-                newMessageText: ""
             }
-        }
-        case "UPDATE-NEW-MESSAGE-TEXT": {
-            return {...state, newMessageText: action.newText}
         }
         default: return state
     }
 }
 
-export const sendMessage = () => {
-    return {type: "SEND_MESSAGE"} as const
-}
-export const onMessageChange = (newText: string) => {
-    return {type: "UPDATE-NEW-MESSAGE-TEXT", newText: newText} as const
+export const sendMessage = (newMessage: string) => {
+    return {type: "SEND_MESSAGE", newMessage} as const
 }

@@ -1,6 +1,6 @@
-import React from "react";
-import {DialogPageType, onMessageChange, sendMessage} from "../../redux/dialogsReducer";
-import {AppStateType} from "../../redux/redux-store";
+import React, {Dispatch} from "react";
+import {DialogPageType, DialogsPageActionsType, sendMessage} from "../../redux/dialogsReducer";
+import {AppStateType} from "../../redux/store";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../Hoc/withAuthRedirect";
@@ -9,8 +9,7 @@ import {compose} from "redux";
 type MapStatePropsType = DialogPageType
 
 type MapDispatchPropsType = {
-    sendMessage: () => void
-    onMessageChange: (newText: string) => void
+    sendMessage: (newMessage: string) => void
 }
 
 export type DialogsPagePropsType = MapStatePropsType & MapDispatchPropsType
@@ -19,11 +18,16 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMessageText: state.dialogsPage.newMessageText,
     }
 }
 
-const dispatch: MapDispatchPropsType = {sendMessage, onMessageChange}
+const dispatch = (dispatch: Dispatch<DialogsPageActionsType>): MapDispatchPropsType => {
+   return {
+       sendMessage: (newMessage: string) => {
+           dispatch(sendMessage(newMessage))
+       }
+   }
+}
 
 export const DialogsContainer = compose<React.ComponentType>(
     withAuthRedirect,

@@ -1,6 +1,6 @@
 import React, {Dispatch} from "react";
 import {connect} from "react-redux";
-import {AppDispatch, AppStateType} from "../../redux/redux-store";
+import {AppDispatch, AppStateType} from "../../redux/store";
 import {
     follow,
     followSuccess, getUsers, setCheckedPage, setFollowInProgress,
