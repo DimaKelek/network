@@ -6,6 +6,8 @@ import { Status } from "./Status/Status";
 
 type DescriptionPropsType = {
     profile: UserProfileType | null
+    status: string
+    updateStatus: (status: string) => void
 }
 
 export function Description(props: DescriptionPropsType) {
@@ -17,14 +19,16 @@ export function Description(props: DescriptionPropsType) {
             <div>
                 <div className={S.title_container}>
                     <span className={S.title}>Имя: </span>
-                    <span className={S.information}>{props.profile.fullName
-                        ? props.profile.fullName : "Information is not defined"}</span>
+                    <span className={S.information}>
+                        {props.profile.fullName || "Information is not defined"}
+                    </span>
                 </div>
-                <Status status={props.profile.aboutMe}/>
+                <Status status={props.status} updateStatus={props.updateStatus}/>
                 <div className={S.title_container}>
                     <span className={S.title}>Поиск работы: </span>
-                    <span className={S.information}>{props.profile.lookingForAJobDescription
-                        ? props.profile.lookingForAJobDescription : "Information is not defined"}</span>
+                    <span className={S.information}>
+                        {props.profile.lookingForAJobDescription || "Information is not defined"}
+                    </span>
                 </div>
             </div>
         </div>

@@ -6,12 +6,18 @@ import {UserProfileType} from "../../../redux/profileReducer";
 
 type RightColumnPropsType = {
     profile: UserProfileType | null
+    status: string
+    updateStatus: (status: string) => void
 }
 
 export function RightColumn(props: RightColumnPropsType) {
     return (
         <div className={S.content}>
-            <Description profile={props.profile}/>
+            <Description
+                profile={props.profile}
+                status={props.status}
+                updateStatus={props.updateStatus}
+            />
             <MyPostsContainer />
         </div>
     );

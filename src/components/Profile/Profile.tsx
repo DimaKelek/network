@@ -7,6 +7,8 @@ import {UserProfileType} from "../../redux/profileReducer";
 
 type ProfilePropsType = {
     profile: UserProfileType | null
+    status: string
+    updateStatus: (status: string) => void
 }
 
 export function Profile(props: ProfilePropsType) {
@@ -16,6 +18,8 @@ export function Profile(props: ProfilePropsType) {
             <LeftColumn profile={props.profile}/>
             <RightColumn
                 profile={props.profile}
+                status={props.status}
+                updateStatus={props.updateStatus}
             />
         </div>
     );

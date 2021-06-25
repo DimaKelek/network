@@ -4,7 +4,6 @@ import {AppStateType} from "../../redux/redux-store";
 import {
     getProfile,
     getStatus,
-    setName,
     setUserProfile,
     updateStatus,
     UserProfileType
@@ -24,7 +23,6 @@ type MapStatePropsType = {
 }
 
 type MapDispatchPropsType = {
-    setName: (fullName: string) => void
     setUserProfile: (profile: UserProfileType) => void
     getProfile: (userID: string) => void
     getStatus: (userID: string) => void
@@ -43,7 +41,10 @@ class ProfileContainer extends React.Component<MainProfilePropsType> {
     }
 
     render() {
-        return <Profile profile={this.props.profile} />
+        return <Profile
+            profile={this.props.profile}
+            status={this.props.status}
+            updateStatus={this.props.updateStatus}/>
     }
 }
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
@@ -52,7 +53,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
         status: state.profilePage.status
     }
 }
-const dispatch: MapDispatchPropsType = {setName, setUserProfile, getProfile, getStatus, updateStatus}
+const dispatch: MapDispatchPropsType = {setUserProfile, getProfile, getStatus, updateStatus}
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, dispatch),

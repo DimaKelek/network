@@ -51,7 +51,6 @@ const initialState: ProfilePageType = {
 export type ProfilePageActionsType =
     ReturnType<typeof addPost>
     | ReturnType<typeof updateNewPost>
-    | ReturnType<typeof setName>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setProfileStatus>
 
@@ -68,12 +67,6 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
         case "UPDATE-NEW-POST-TEXT": {
             return {...state, newPostText: action.newText}
         }
-        case "SET-NAME":
-            if (state.profile) {
-                return {...state, profile: {...state.profile, fullName: action.fullName}}
-            } else {
-                return {...state}
-            }
         case "SET-USER-PROFILE":
             return {...state, profile: action.profile}
         case "SET-PROFILE-STATUS":
@@ -88,9 +81,6 @@ export const addPost = () => {
 }
 export const updateNewPost = (newText: string) => {
     return {type: "UPDATE-NEW-POST-TEXT", newText} as const
-}
-export const setName = (fullName: string) => {
-    return {type: "SET-NAME", fullName} as const
 }
 export const setUserProfile = (profile: UserProfileType) => {
     return {type: "SET-USER-PROFILE", profile} as const
