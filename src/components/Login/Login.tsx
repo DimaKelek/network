@@ -2,18 +2,23 @@ import React from "react";
 import S from "./Login.module.css"
 import {MyButton} from "../Decoration/MyButton/MyButton";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {SuperInput} from "../Decoration/SuperInput/SuperInput";
-import {ReactCheckbox} from "../Decoration/ReactCheckbox/ReactCheckbox";
+import {connect} from "react-redux";
+import {login, logout} from "../../redux/auth-reducer";
+import {AppStateType} from "../../redux/store";
+import {Redirect} from "react-router-dom";
 
 type FormDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
 
-export function Login() {
+function Login(props: LoginPropsType) {
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData);
+        props.login(formData.email, formData.password, formData.rememberMe)
+    }
+    if(props.isAuth) {
+        return <Redirect to="/profile"/>
     }
     return (
         <div className={S.login}>
@@ -23,26 +28,17 @@ export function Login() {
 }
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = props => {
-    const loginInput = () => {
-        return <SuperInput placeholder={"Login"}/>
-    }
-    const passwordInput = () => {
-        return <SuperInput placeholder={"Password"}/>
-    }
-    const checkBox = () => {
-        return <ReactCheckbox>Remember Me</ReactCheckbox>
-    }
     return (
         <form onSubmit={props.handleSubmit}>
             <h2>login</h2>
             <div className={`${S.input} ${S.name}`}>
-                <Field placeholder={"Login"} name={"login"} component={"input"}/>
+                <Field placeholder={"Email"} name={"email"} component={"input"}/>
             </div>
             <div className={`${S.input} ${S.password}`}>
-                <Field placeholder={"Password"} name={"password"} component={"input"}/>
+                <Field placeholder={"Password"} name={"password"} component={"input"} type={"password"}/>
             </div>
             <div className={S.checkbox}>
-                <Field name={"rememberMe"} component={"input"} type={"checkbox"}/>Remember me
+                <Field name={"rememberMe"} component={"input"} type={"checkbox"}/> Remember me
             </div>
             <div className={S.button}>
                 <MyButton>Login</MyButton>
@@ -52,3 +48,22 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = props => {
 }
 
 const LoginReduxFrom = reduxForm<FormDataType>({form: "Login"})(LoginForm)
+
+type MapDispatchToPropsType = {
+    login: (email: string, password: string, rememberMe: boolean) => void
+    logout: () => void
+}
+
+type MapStateToPropsType = {
+    isAuth: boolean
+}
+
+type LoginPropsType = MapStateToPropsType & MapDispatchToPropsType
+
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
+const dispatch: MapDispatchToPropsType = {login, logout}
+export const LoginContainer =  connect(mapStateToProps, dispatch)(Login)

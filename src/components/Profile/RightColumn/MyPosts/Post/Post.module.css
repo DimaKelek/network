@@ -24,7 +24,7 @@
 
 .message {
     grid-area: m;
-    background-color: #333333;
+    background-color: #0c0c0c;
     border-radius: 50px;
     padding: 15px 25px;
     width: 440px;

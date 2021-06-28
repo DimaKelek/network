@@ -19,10 +19,10 @@ type GetUsersType = {
 }
 type GetProfileType = UserProfileType
 
-type ResponseType = {
+type ResponseType<D> = {
     resultCode: number
     messages: string[]
-    data: {}
+    data: D
 }
 
 const instance = axios.create({
@@ -36,10 +36,10 @@ export const usersAPI = {
         return instance.get<GetUsersType>(`users?page=${checkedPage}&count=${pageSize}`).then(response => response.data)
     },
     followUser(userID: number) {
-        return instance.post<ResponseType>(`follow/${userID}`).then(response => response.data)
+        return instance.post<ResponseType<{}>>(`follow/${userID}`).then(response => response.data)
     },
     unfollowUser(userID: number) {
-        return instance.delete<ResponseType>(`follow/${userID}`).then(response => response.data)
+        return instance.delete<ResponseType<{}>>(`follow/${userID}`).then(response => response.data)
     }
 }
 
@@ -51,12 +51,18 @@ export const profileAPI = {
         return instance.get<string>(`profile/status/${userID}`)
     },
     updateStatus(status: string) {
-        return instance.put<ResponseType>(`profile/status`, {status}).then(response => response.data)
+        return instance.put<ResponseType<{}>>(`profile/status`, {status}).then(response => response.data)
     },
 }
 
 export const authAPI = {
     me() {
-        return instance.get<AuthMeType>(`auth/me`).then(response => response.data)
+        return instance.get<AuthMeType>(`auth/me`)
     },
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance.post<ResponseType<{userId: number}>>(`auth/login`, {email, password, rememberMe})
+    },
+    logout() {
+        return instance.delete<ResponseType<{}>>(`auth/login`)
+    }
 }

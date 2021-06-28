@@ -4,11 +4,13 @@ import {ProfileHeader} from "./ProfileHeader/ProfileHeader";
 import {LeftColumn} from "./LeftColumn/LeftColumn";
 import {RightColumn} from './RightColumn/RightColumn';
 import {UserProfileType} from "../../redux/profileReducer";
+import {UserType} from "../../redux/usersReducer";
 
 type ProfilePropsType = {
     profile: UserProfileType | null
     status: string
     updateStatus: (status: string) => void
+    users: UserType[]
 }
 
 export function Profile(props: ProfilePropsType) {
@@ -20,6 +22,7 @@ export function Profile(props: ProfilePropsType) {
                 profile={props.profile}
                 status={props.status}
                 updateStatus={props.updateStatus}
+                users={props.users}
             />
         </div>
     );

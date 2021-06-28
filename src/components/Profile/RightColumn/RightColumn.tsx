@@ -3,11 +3,13 @@ import S from "./RightColumn.module.css"
 import {Description} from "./Description/Description";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {UserProfileType} from "../../../redux/profileReducer";
+import {UserType} from "../../../redux/usersReducer";
 
 type RightColumnPropsType = {
     profile: UserProfileType | null
     status: string
     updateStatus: (status: string) => void
+    users: UserType[]
 }
 
 export function RightColumn(props: RightColumnPropsType) {
@@ -17,6 +19,7 @@ export function RightColumn(props: RightColumnPropsType) {
                 profile={props.profile}
                 status={props.status}
                 updateStatus={props.updateStatus}
+                users={props.users}
             />
             <MyPostsContainer />
         </div>

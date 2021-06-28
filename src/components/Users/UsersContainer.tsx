@@ -1,11 +1,16 @@
-import React, {Dispatch} from "react";
+import React from "react";
 import {connect} from "react-redux";
-import {AppDispatch, AppStateType} from "../../redux/store";
+import {AppStateType} from "../../redux/store";
 import {
     follow,
-    followSuccess, getUsers, setCheckedPage, setFollowInProgress,
-    setLoading, setMaxRenderPage, setMinRenderPage, unfollow,
-    unfollowSuccess, UsersPageActionsType, UsersPageType
+    getUsers,
+    setCheckedPage,
+    setFollowInProgress,
+    setLoading,
+    setMaxRenderPage,
+    setMinRenderPage,
+    unfollow,
+    UsersPageType
 } from "../../redux/usersReducer";
 import {Users} from "./Users";
 import {compose} from "redux";

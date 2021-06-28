@@ -27,8 +27,26 @@
     letter-spacing: 5px;
     transition-duration: 1s;
     margin: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .title span:hover {
+    text-shadow: 0 0 10px #038ebc, 0 0 30px #038ebc, 0 0 80px #038ebc   ;
+    color: #fff;
+    transition: .15s;
+}
+
+.logout {
+    text-transform: uppercase;
+    margin-right: 10px;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    font-size: 70px;
+    font-weight: bold;
+    color: #314547;
+}
+
+.logout:hover {
     text-shadow: 0 0 10px #038ebc, 0 0 30px #038ebc, 0 0 80px #038ebc   ;
     color: #fff;
     transition: .15s;

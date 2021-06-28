@@ -1,45 +1,79 @@
-import {authAPI, usersAPI} from "../api/api";
+import {authAPI} from "../api/api";
 import {Dispatch} from "react";
 
 export type AuthActionType = ReturnType<typeof setUserData>
 
-export type AuthUser = {
+export type AuthUserType = {
     userId: number | null
     email: string | null
     login: string | null
     isAuth: boolean
 }
 
-const initialState: AuthUser = {
+const initialState: AuthUserType = {
     userId: null,
     email: null,
     login: null,
     isAuth: false
 }
 
-export const authReducer = (state: AuthUser = initialState, action: AuthActionType): AuthUser => {
+export const authReducer = (state: AuthUserType = initialState, action: AuthActionType): AuthUserType => {
     switch (action.type) {
         case "SET-USER-DATA":
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.data
             }
         default:
             return state
     }
 }
 
-export const setUserData = (userId: number, email: string, login: string) => {
-    return {type: "SET-USER-DATA", data: {userId, email, login}} as const
+export const setUserData = (data: AuthUserType) => {
+    return {type: "SET-USER-DATA", data} as const
 }
 
 export const getAuth = () => {
     return (dispatch: Dispatch<AuthActionType>) => {
-        authAPI.me().then(data => {
-            if (data.resultCode === 0) {
-                let {id, email, login} = data.data
-                dispatch(setUserData(id, email, login))
+        authAPI.me().then(response => {
+            if (response.data.resultCode === 0) {
+                let {id, email, login} = response.data.data
+                let newUserData: AuthUserType = {userId: id, email, login, isAuth: true}
+                dispatch(setUserData(newUserData))
+            }
+        })
+    }
+}
+
+export const login = (email: string, password: string, rememberMe: boolean) => {
+    return (dispatch: Dispatch<AuthActionType>) => {
+        authAPI.login(email, password, rememberMe).then(response => {
+            if (response.data.resultCode === 0) {
+                // //@ts-ignore
+                // dispatch(getAuth())
+                authAPI.me().then(response => {
+                    if (response.data.resultCode === 0) {
+                        let {id, email, login} = response.data.data
+                        let newUserData: AuthUserType = {userId: id, email, login, isAuth: true}
+                        dispatch(setUserData(newUserData))
+                    }
+                })
+            }
+        })
+    }
+}
+
+export const logout = () => {
+    return (dispatch: Dispatch<AuthActionType>) => {
+        authAPI.logout().then(response => {
+            if (response.data.resultCode === 0) {
+                let newUserData: AuthUserType = {
+                    userId: null,
+                    email: null,
+                    login: null,
+                    isAuth: false
+                }
+                dispatch(setUserData(newUserData))
             }
         })
     }
