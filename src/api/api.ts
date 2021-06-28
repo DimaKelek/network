@@ -44,10 +44,10 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-    getProfile(userID: string) {
+    getProfile(userID: number) {
         return instance.get<GetProfileType>(`profile/${userID}`).then(response => response.data)
     },
-    getStatus(userID: string) {
+    getStatus(userID: number) {
         return instance.get<string>(`profile/status/${userID}`)
     },
     updateStatus(status: string) {

@@ -1,0 +1,48 @@
+.textarea {
+    border: 1px solid #0c0c0c;
+    background-color: #0c0c0c;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    padding: 10px 0 10px 15px;
+    cursor: text;
+    color: #ffffff;
+    overflow: auto;
+    min-height: 80px;
+    resize: vertical;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-align: start;
+    transition: .5s;
+    overflow-wrap: break-word;
+    width: 100%;
+    outline: none;
+}
+
+.input input {
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    height: 28px;
+    padding: 10px 0 10px 15px;
+    color: #ffffff;
+    background-color: #0c0c0c;
+    border: 1px solid #0c0c0c;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    transition: .3s;
+}
+
+.formControl {
+
+}
+
+.formControl.error input {
+    border: 1px solid #e56969;
+}
+
+.formControl.error textarea {
+    border: 1px solid #e56969;
+}
+
+.formControl.error span {
+    display: block;
+    color: #e56969;
+}

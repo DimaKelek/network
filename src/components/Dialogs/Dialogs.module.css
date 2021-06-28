@@ -8,25 +8,12 @@
     grid-template-areas:
     "d m"
     "d am";
+
+
 }
 
-.dialogs textarea {
-    border: 1px solid #0c0c0c;
-    background-color: #0c0c0c;
-    padding: 10px 0 10px 15px;
-    font-family: Comic Sans MS, Comic Sans, cursive;
-    cursor: text;
-    color: #ffffff;
-    overflow: auto;
-    min-height: 80px;
-    resize: vertical;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-align: start;
-    transition: .5s;
-    overflow-wrap: break-word;
+.textBox {
     width: 80%;
-    outline: none;
 }
 
 .messages_box {

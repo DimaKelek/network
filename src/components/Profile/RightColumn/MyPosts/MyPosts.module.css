@@ -7,24 +7,6 @@ h3 {
     margin-bottom: 10px;
 }
 
-.posts_box textarea {
-    border: 1px solid #0c0c0c;
-    background-color: #0c0c0c;
-    font-family: Comic Sans MS, Comic Sans, cursive;
-    padding: 10px 0 10px 15px;
-    cursor: text;
-    color: #ffffff;
-    overflow: auto;
-    min-height: 80px;
-    resize: vertical;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-align: start;
-    transition: .5s;
-    overflow-wrap: break-word;
-    width: 100%;
-    outline: none;
-}
 .addPost {
     padding: 5px 0;
 }

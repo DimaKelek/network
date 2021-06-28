@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {AppStateType} from '../../../../redux/store';
 import {MyPosts} from './MyPosts';
 import {addPost, PostType, ProfilePageActionsType} from "../../../../redux/profileReducer";
-import {DialogsPageActionsType} from "../../../../redux/dialogsReducer";
 
 
 type MapStatePropsType = {
