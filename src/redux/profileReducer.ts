@@ -1,6 +1,7 @@
 import {v1} from "uuid";
 import {Dispatch} from "react";
 import {profileAPI} from "../api/api";
+import {AppActionsType, AppThunk} from "./store";
 
 export type PostType = {
     id: string
@@ -82,22 +83,22 @@ export const setProfileStatus = (status: string) => {
     return {type: "SET-PROFILE-STATUS", status} as const
 }
 
-export const getProfile = (userID: number) => {
-    return (dispatch: Dispatch<ProfilePageActionsType>) => {
+export const getProfile = (userID: number): AppThunk => {
+    return (dispatch) => {
         profileAPI.getProfile(userID).then(response => {
             dispatch(setUserProfile(response))
         })
     }
 }
-export const getStatus = (userID: number) => {
-    return (dispatch: Dispatch<ProfilePageActionsType>) => {
+export const getStatus = (userID: number): AppThunk => {
+    return (dispatch) => {
         profileAPI.getStatus(userID).then(response => {
             dispatch(setProfileStatus(response.data))
         })
     }
 }
-export const updateStatus = (status: string) => {
-    return (dispatch: Dispatch<ProfilePageActionsType>) => {
+export const updateStatus = (status: string): AppThunk => {
+    return (dispatch) => {
         profileAPI.updateStatus(status).then(response => {
             if (response.resultCode === 0) {
                 dispatch(setProfileStatus(status))

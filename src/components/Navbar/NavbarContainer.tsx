@@ -5,14 +5,13 @@ import {connect} from "react-redux";
 import {NavbarMenuType} from "../../redux/navbarReducer";
 
 type MapStatePropsType = NavbarMenuType
-type MapDispatchPropsType = {}
 
-export type NavbarPropsType = MapStatePropsType & MapDispatchPropsType
+
+export type NavbarPropsType = MapStatePropsType
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         navbarItems: state.navbar.navbarItems
     }
 }
-const dispatch: MapDispatchPropsType = () => {}
-export const NavbarContainer = connect(mapStateToProps, dispatch)(Navbar)
+export const NavbarContainer = connect(mapStateToProps)(Navbar)

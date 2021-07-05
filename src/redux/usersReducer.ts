@@ -1,5 +1,6 @@
 import {usersAPI} from "../api/api";
 import {Dispatch} from "react";
+import {AppActionsType, AppThunk} from "./store";
 
 export type PhotosType = {
     small: string | null
@@ -119,14 +120,8 @@ export const setFollowInProgress = (userID: number, isLoading: boolean) => {
     return {type: "SET-FOLLOW-IN-PROGRESS", userID, isLoading} as const
 }
 
-
-// export type ThunkActionType<R, S, E, A extends Action> = (
-//     dispatch: ThunkDispatch<S, E, A>,
-//     getState: () => S,
-//     extraArgument: E) => R
-
-export const getUsers = (checkedPage: number, pageSize: number) => {
-    return (dispatch: Dispatch<UsersPageActionsType>) => {
+export const getUsers = (checkedPage: number, pageSize: number): AppThunk => {
+    return (dispatch) => {
         dispatch(setLoading(true))
         usersAPI.getUsers(checkedPage, pageSize).then(data => {
             dispatch(setLoading(false))
@@ -136,8 +131,8 @@ export const getUsers = (checkedPage: number, pageSize: number) => {
     }
 }
 
-export const follow = (userID: number) => {
-    return (dispatch: Dispatch<UsersPageActionsType>) => {
+export const follow = (userID: number): AppThunk => {
+    return (dispatch) => {
         dispatch(setFollowInProgress(userID, true))
         usersAPI.followUser(userID).then(data => {
             data.resultCode === 0 && dispatch(followSuccess(userID))
@@ -146,8 +141,8 @@ export const follow = (userID: number) => {
     }
 }
 
-export const unfollow = (userID: number) => {
-    return (dispatch: Dispatch<UsersPageActionsType>) => {
+export const unfollow = (userID: number): AppThunk => {
+    return (dispatch) => {
         dispatch(setFollowInProgress(userID, true))
         usersAPI.unfollowUser(userID).then(data => {
             data.resultCode === 0 && dispatch(unfollowSuccess(userID))
