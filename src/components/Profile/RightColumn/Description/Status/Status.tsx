@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, PureComponent} from "react";
 import S from "./Status.module.css";
 import {SuperInput} from "../../../../Decoration/SuperInput/SuperInput";
 
@@ -7,7 +7,7 @@ type StatusPropsType = {
     updateStatus: (status: string) => void
 }
 
-export class Status extends React.Component<StatusPropsType> {
+export class Status extends PureComponent<StatusPropsType> {
     state = {
         editMode: false,
         status: this.props.status

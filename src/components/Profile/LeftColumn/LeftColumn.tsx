@@ -7,11 +7,12 @@ import {UserProfileType} from "../../../store/profileReducer";
 type LeftColumnPropsType = {
     profile: UserProfileType | null
 }
-export function LeftColumn(props: LeftColumnPropsType) {
+export const LeftColumn: React.FC<LeftColumnPropsType> = React.memo(props => {
+    const {profile, ...restProps} = props
     return (
         <div className={S.content}>
-            <Avatar profile={props.profile}/>
+            <Avatar profile={profile}/>
             <Friends />
         </div>
     );
-}
+})

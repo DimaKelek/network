@@ -2,7 +2,8 @@ import React from 'react';
 import {PostType} from '../../../../../store/profileReducer';
 import S from './Post.module.css';
 
-export function Post(props: PostType) {
+export const Post: React.FC<PostType> = React.memo(props => {
+    const {message, ...restProps} = props
     return (
         <div className={S.item}>
             <div className={S.avatar}>
@@ -10,9 +11,9 @@ export function Post(props: PostType) {
             </div>
             <div>
                 <div className={S.message}>
-                    {props.message}
+                    {message}
                 </div>
             </div>
         </div>
     );
-}
+})

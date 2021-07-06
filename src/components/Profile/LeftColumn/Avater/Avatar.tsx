@@ -6,13 +6,15 @@ import {Preloader} from "../../../Decoration/Preloader/Preloader";
 type AvatarPropsType = {
     profile: UserProfileType | null
 }
-export function Avatar(props: AvatarPropsType) {
-    if(!props.profile) {
+export const Avatar: React.FC<AvatarPropsType> = React.memo((props) => {
+    const {profile, ...restProps} = props
+
+    if(!profile) {
         return <Preloader />
     }
     return (
         <div className={S.avatar}>
-            <img src={props.profile.photos.large ? props.profile.photos.large :"https://goo.su/4zdi"} alt="avatar"/>
+            <img src={profile.photos.large || "https://goo.su/4zdi"} alt="avatar"/>
         </div>
     );
-}
+})

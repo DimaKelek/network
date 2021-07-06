@@ -2,19 +2,11 @@ import React from 'react';
 import S from './MyPosts.module.css';
 import {Post} from "./Post/Post";
 import {MyPostsPropsType} from "./MyPostsContainer";
-import {MyButton} from '../../../Decoration/MyButton/MyButton';
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {maxLengthCreator, required} from "../../../Decoration/FormControl/validator";
-import {ValidateTextarea} from "../../../Decoration/FormControl/FormControl";
+import {AddPostFormPropsType, AddPostFormRedux} from "./AddPostForm/AddPostFormRedux";
 
-type AddPostFormPropsType = {
-    newPostMessage: string
-}
-
-export function MyPosts(props: MyPostsPropsType) {
+export const MyPosts: React.FC<MyPostsPropsType> = React.memo(props => {
     const posts = props.posts.map(p => <Post key={p.id} id={p.id} message={p.message}/>);
 
-    //----callbacks---//
     const addPost = (values: AddPostFormPropsType) => {
         props.addPost(values.newPostMessage)
     }
@@ -28,23 +20,4 @@ export function MyPosts(props: MyPostsPropsType) {
             <div className={S.posts}>{posts}</div>
         </div>
     );
-}
-const maxLength30 = maxLengthCreator(30)
-const AddPostForm: React.FC<InjectedFormProps<AddPostFormPropsType>> = props => {
-
-    return <form onSubmit={props.handleSubmit}>
-        <div>
-            <Field
-                name={"newPostMessage"}
-                placeholder="Что нового?)"
-                component={ValidateTextarea}
-                validate={[required, maxLength30]}
-            />
-        </div>
-        <div className={S.add}>
-            <MyButton>Add Post</MyButton>
-        </div>
-    </form>;
-}
-
-const AddPostFormRedux = reduxForm<AddPostFormPropsType>({form: "AddPostForm"})(AddPostForm)
+})
