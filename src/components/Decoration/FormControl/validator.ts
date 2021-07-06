@@ -1,6 +1,6 @@
 export const required = (value: string) => {
     if(value) return undefined
-    return "error message";
+    return "Invalid data";
 }
 
 export const maxLengthCreator = (maxLength: number) => (value: string) => {

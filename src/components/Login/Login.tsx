@@ -23,9 +23,18 @@ function Login(props: LoginPropsType) {
         return <Redirect to="/profile"/>
     }
     return (
-        <div className={S.login}>
-            <LoginReduxFrom onSubmit={onSubmit}/>
-        </div>
+        <>
+            <div className={S.testData}>
+                <h3>Test data</h3>
+                <div>Email: free@samuraijs.com</div>
+                <div>Password: free</div>
+            </div>
+            <div className={S.login}>
+
+                <LoginReduxFrom onSubmit={onSubmit}/>
+            </div>
+        </>
+
     )
 }
 const maxLength35 = maxLengthCreator(35)

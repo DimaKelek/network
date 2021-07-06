@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import './App.css';
 import {Route, withRouter} from 'react-router-dom';
 import {News} from "../components/News/News";
@@ -18,7 +18,7 @@ import {Preloader} from "../components/Decoration/Preloader/Preloader";
 
 type AppPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-class App extends React.Component<AppPropsType> {
+class App extends PureComponent<AppPropsType> {
     componentDidMount() {
         this.props.initApp()
     }
