@@ -2,7 +2,6 @@ import React, {ButtonHTMLAttributes, DetailedHTMLProps} from "react";
 import S from "./MyButton.module.css"
 
 type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
-
 type MyButtonPropsType = DefaultButtonPropsType & {
     disabled?: boolean
     title?: string
@@ -15,7 +14,6 @@ export const MyButton: React.FC<MyButtonPropsType> = props => {
     const onclickCallback = () => {
         onClick && onClick()
     }
-
     const style = `${S.button} ${className}`
     return (
         <>
@@ -23,7 +21,6 @@ export const MyButton: React.FC<MyButtonPropsType> = props => {
                 className={style}
                 onClick={onclickCallback}
                 disabled={disabled}
-
                 {...restProps}
             >
                 {children ? children : title}

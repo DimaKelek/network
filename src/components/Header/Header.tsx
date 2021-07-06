@@ -1,7 +1,7 @@
 import React from 'react';
 import S from './Header.module.css';
-import logo from '../../logo.jpg'
-import auth from '../../authLogo.jpg'
+import logo from '../../App/logo.jpg'
+import auth from '../../App/authLogo.jpg'
 import {NavLink} from "react-router-dom";
 import {AuthPropsType} from "./HeaderContainer";
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import {Navbar} from "./Navbar";
-import {AppStateType} from "../../redux/store";
+import {AppStateType} from "../../store/store";
 import {connect} from "react-redux";
-import {NavbarMenuType} from "../../redux/navbarReducer";
+import {NavbarMenuType} from "../../store/navbarReducer";
 
 type MapStatePropsType = NavbarMenuType
 

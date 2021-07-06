@@ -2,7 +2,6 @@ import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes} from "react"
 import S from "./ReactCheckbox.module.css"
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
-
 type ReactCheckboxPropsType = DefaultInputPropsType & {
     checked?: boolean
     setChecked?: (e: boolean) => void
@@ -23,7 +22,6 @@ export const ReactCheckbox: React.FC<ReactCheckboxPropsType> = props => {
                 onChange={onChangeCallback}
                 type={"checkbox"}
                 className={S.checkInput}
-
                 {...restProps}
             />
             <span className={S.checkbox}/>

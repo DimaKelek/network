@@ -1,5 +1,5 @@
 import React from 'react';
-import {PostType} from '../../../../../redux/profileReducer';
+import {PostType} from '../../../../../store/profileReducer';
 import S from './Post.module.css';
 
 export function Post(props: PostType) {

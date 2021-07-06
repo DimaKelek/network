@@ -1,18 +1,5 @@
 import {v1} from "uuid";
 
-export type DialogPageType = {
-    dialogs: Array<DialogType>
-    messages: Array<MessageType>
-}
-export type DialogType = {
-    id: string
-    name: string
-}
-export type MessageType = {
-    id: string
-    message: string
-}
-
 const initialState: DialogPageType = {
     dialogs: [
         {id: v1(), name: "Виталик"},
@@ -28,8 +15,6 @@ const initialState: DialogPageType = {
     ]
 }
 
-export type DialogsPageActionsType = ReturnType<typeof sendMessage>
-
 export const dialogsReducer = (state: DialogPageType = initialState, action: DialogsPageActionsType): DialogPageType => {
     switch (action.type) {
         case "SEND_MESSAGE": {
@@ -37,15 +22,26 @@ export const dialogsReducer = (state: DialogPageType = initialState, action: Dia
                 id: v1(),
                 message: action.newMessage
             }
-            return {
-                ...state,
-                messages: [...state.messages, newMessage],
-            }
+            return {...state, messages: [...state.messages, newMessage],}
         }
         default: return state
     }
 }
 
-export const sendMessage = (newMessage: string) => {
-    return {type: "SEND_MESSAGE", newMessage} as const
+// actions
+export const sendMessage = (newMessage: string) => ({type: "SEND_MESSAGE", newMessage} as const)
+
+// types
+export type DialogsPageActionsType = ReturnType<typeof sendMessage>
+export type DialogPageType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+}
+export type DialogType = {
+    id: string
+    name: string
+}
+export type MessageType = {
+    id: string
+    message: string
 }

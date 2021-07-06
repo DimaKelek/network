@@ -2,7 +2,6 @@ import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, KeyboardEven
 import S from "./SuperInput.module.css"
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
-
 type SuperInputPropsType = DefaultInputPropsType & {
     onChangeText?: (value: string) => void
     onEnter?: () => void
@@ -22,7 +21,6 @@ export const SuperInput: React.FC<SuperInputPropsType> = (props) => {
         onKeyPress && onKeyPress(e);
         onEnter && e.key === 'Enter' && onEnter()
     }
-
     const finalInputClassName = `${error ? S.errorInput : S.mainStyle} ${className}`
     const finalErrorClassName = `${S.error} ${errorClassName || ''}`
     return (
@@ -32,7 +30,6 @@ export const SuperInput: React.FC<SuperInputPropsType> = (props) => {
                 className={finalInputClassName}
                 onChange={onChangeCallback}
                 onKeyPress={onKeyPressCallback}
-
                 {...restProps}
             />
             {error && <div className={finalErrorClassName}>{error}</div>}

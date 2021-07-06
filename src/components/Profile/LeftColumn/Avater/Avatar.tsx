@@ -1,6 +1,6 @@
 import React from "react";
 import S from "./Avatar.module.css"
-import {UserProfileType} from "../../../../redux/profileReducer";
+import {UserProfileType} from "../../../../store/profileReducer";
 import {Preloader} from "../../../Decoration/Preloader/Preloader";
 
 type AvatarPropsType = {

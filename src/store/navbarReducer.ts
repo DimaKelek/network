@@ -1,16 +1,5 @@
 import {v1} from "uuid";
 
-export type NavbarType = {
-    id: string
-    title: string
-    path: string
-}
-export type NavbarMenuType = {
-    navbarItems: Array<NavbarType>
-}
-
-export type NavbarActionsType = {}
-
 const initialState: NavbarMenuType = {
     navbarItems: [
         {id: v1(), title: "✓ Profile", path: "profile"},
@@ -25,3 +14,14 @@ const initialState: NavbarMenuType = {
 export const navbarReducer = (state: NavbarMenuType = initialState, action: NavbarActionsType) => {
     return state;
 }
+
+// types
+export type NavbarType = {
+    id: string
+    title: string
+    path: string
+}
+export type NavbarMenuType = {
+    navbarItems: Array<NavbarType>
+}
+export type NavbarActionsType = {}

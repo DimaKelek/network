@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {addMessageAC, DialogPageType, dialogsReducer, updateMessageTextAC} from "../dialogsReducer";
+import {DialogPageType, dialogsReducer, sendMessage} from "../store/dialogsReducer";
 
 let startState: DialogPageType;
 
@@ -16,18 +16,12 @@ beforeEach(() => {
             {id: v1(), message: "Hi"},
             {id: v1(), message: "How are you?"},
             {id: v1(), message: "What are you doing?"}
-        ],
-        newMessageText: "Hello my best friends"
+        ]
     }
 })
 
 test("message should be added", () => {
-    const endState = dialogsReducer(startState, addMessageAC())
+    const endState = dialogsReducer(startState, sendMessage("Hello my best friends"))
     expect(endState.messages.length).toBe(4)
     expect(endState.messages[3].message).toBe("Hello my best friends")
-    expect(endState.newMessageText).toBe("")
-})
-test("message for textarea should be changed", () => {
-    const endState = dialogsReducer(startState, updateMessageTextAC("Hello"))
-    expect(endState.newMessageText).toBe("Hello")
 })

@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar } from "./Avater/Avatar";
 import S from "./LeftColumn.module.css"
 import {Friends} from "./Friends/Friends";
-import {UserProfileType} from "../../../redux/profileReducer";
+import {UserProfileType} from "../../../store/profileReducer";
 
 type LeftColumnPropsType = {
     profile: UserProfileType | null

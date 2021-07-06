@@ -1,6 +1,6 @@
 import React, {Dispatch} from "react";
-import {DialogPageType, DialogsPageActionsType, sendMessage} from "../../redux/dialogsReducer";
-import {AppStateType} from "../../redux/store";
+import {DialogPageType, DialogsPageActionsType, sendMessage} from "../../store/dialogsReducer";
+import {AppStateType} from "../../store/store";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../Hoc/withAuthRedirect";

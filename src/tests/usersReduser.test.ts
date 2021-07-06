@@ -1,12 +1,5 @@
-import {
-    follow,
-    setCheckedPage, setLoading,
-    setMaxRenderPage, setMinRenderPage,
-    setTotalCount,
-    unfollow,
-    UsersPageType,
-    usersReducer
-} from "../usersReducer";
+import {followSuccess, setCheckedPage, setLoading, setMaxRenderPage, setMinRenderPage,
+    setTotalCount, unfollowSuccess, UsersPageType, usersReducer} from "../store/usersReducer";
 
 let startState: UsersPageType ;
 
@@ -58,13 +51,13 @@ beforeEach(() => {
 })
 
 test("the followed field must be changed to true", () => {
-    const endState = usersReducer(startState, follow(2))
+    const endState = usersReducer(startState, followSuccess(2))
     expect(endState.users[1].followed).toBe(true)
 })
 
 test("the followed field must be changed to false", () => {
-    const endState_test_1 = usersReducer(startState, unfollow(1))
-    const endState_test_2 = usersReducer(startState, unfollow(3))
+    const endState_test_1 = usersReducer(startState, unfollowSuccess(1))
+    const endState_test_2 = usersReducer(startState, unfollowSuccess(3))
     expect(endState_test_1.users[0].followed).toBe(false)
     expect(endState_test_2.users[2].followed).toBe(false)
 })

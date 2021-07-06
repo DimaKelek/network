@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {Header} from "./Header";
 import {connect} from "react-redux";
-import {logout} from "../../redux/auth-reducer";
-import {AppStateType} from "../../redux/store";
+import {logout} from "../../store/auth-reducer";
+import {AppStateType} from "../../store/store";
 
 
 type MapDispatchPropsType = {
@@ -15,7 +15,7 @@ type MapStatePropsType = {
 
 export type AuthPropsType = MapStatePropsType & MapDispatchPropsType
 
-class HeaderContainer extends React.Component<AuthPropsType> {
+class HeaderContainer extends PureComponent<AuthPropsType> {
     render() {
         return <Header {...this.props}/>
     }

@@ -1,13 +1,13 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {AppStateType} from "../../redux/store";
+import {AppStateType} from "../../store/store";
 import {getProfile, getStatus, setUserProfile, updateStatus, UserProfileType
-} from "../../redux/profileReducer";
+} from "../../store/profileReducer";
 import {Profile} from "./Profile";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../Hoc/withAuthRedirect";
 import { compose } from "redux";
-import {UserType} from "../../redux/usersReducer";
+import {UserType} from "../../store/usersReducer";
 
 type PathParamsType = {
     userId: string
@@ -31,11 +31,14 @@ type MapDispatchPropsType = {
 export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
 type MainProfilePropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
 
-class ProfileContainer extends React.Component<MainProfilePropsType> {
+class ProfileContainer extends PureComponent<MainProfilePropsType> {
     componentDidMount() {
         let userID: number | null = Number(this.props.match.params.userId)
         if(!userID) {
             userID = this.props.authUserId
+            if(!userID) {
+                this.props.history.push("/login")
+            }
         }
         if (typeof userID === "number") {
             this.props.getProfile(userID)

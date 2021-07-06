@@ -1,6 +1,6 @@
 import axios from "axios";
-import {UserType} from "../redux/usersReducer";
-import {UserProfileType} from "../redux/profileReducer";
+import {UserType} from "../store/usersReducer";
+import {UserProfileType} from "../store/profileReducer";
 
 export type AuthMeType = {
     data: {

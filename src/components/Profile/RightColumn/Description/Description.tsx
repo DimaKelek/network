@@ -1,9 +1,9 @@
 import React from "react";
 import S from "./Description.module.css"
-import {UserProfileType} from "../../../../redux/profileReducer";
+import {UserProfileType} from "../../../../store/profileReducer";
 import {Preloader} from "../../../Decoration/Preloader/Preloader";
 import { Status } from "./Status/Status";
-import {UserType} from "../../../../redux/usersReducer";
+import {UserType} from "../../../../store/usersReducer";
 
 type DescriptionPropsType = {
     profile: UserProfileType | null

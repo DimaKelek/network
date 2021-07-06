@@ -2,7 +2,7 @@ import React from "react";
 import S from "./Users.module.css";
 import loader from "./../Decoration/Preloader/Preloader.module.css"
 import {MyButton} from "../Decoration/MyButton/MyButton";
-import {UserType} from "../../redux/usersReducer";
+import {UserType} from "../../store/usersReducer";
 import {Preloader} from "../Decoration/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
 

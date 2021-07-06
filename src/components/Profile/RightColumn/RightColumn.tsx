@@ -2,8 +2,8 @@ import React from "react";
 import S from "./RightColumn.module.css"
 import {Description} from "./Description/Description";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {UserProfileType} from "../../../redux/profileReducer";
-import {UserType} from "../../../redux/usersReducer";
+import {UserProfileType} from "../../../store/profileReducer";
+import {UserType} from "../../../store/usersReducer";
 
 type RightColumnPropsType = {
     profile: UserProfileType | null

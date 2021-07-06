@@ -1,17 +1,8 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import {connect} from "react-redux";
-import {AppStateType} from "../../redux/store";
-import {
-    follow,
-    getUsers,
-    setCheckedPage,
-    setFollowInProgress,
-    setLoading,
-    setMaxRenderPage,
-    setMinRenderPage,
-    unfollow,
-    UsersPageType
-} from "../../redux/usersReducer";
+import {AppStateType} from "../../store/store";
+import {follow, getUsers, setCheckedPage, setFollowInProgress, setLoading,
+    setMaxRenderPage, setMinRenderPage, unfollow, UsersPageType} from "../../store/usersReducer";
 import {Users} from "./Users";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../Hoc/withAuthRedirect";
@@ -31,7 +22,7 @@ type MapDispatchPropsType = {
 
 export type UsersPagePropsType = MapStatePropsType & MapDispatchPropsType
 
-class UsersContainer extends React.Component<UsersPagePropsType> {
+class UsersContainer extends PureComponent<UsersPagePropsType> {
     componentDidMount() {
         this.props.getUsers(this.props.checkedPage, this.props.pageSize)
     }

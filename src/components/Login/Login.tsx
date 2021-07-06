@@ -3,8 +3,8 @@ import S from "./Login.module.css"
 import {MyButton} from "../Decoration/MyButton/MyButton";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {connect} from "react-redux";
-import {login, logout} from "../../redux/auth-reducer";
-import {AppStateType} from "../../redux/store";
+import {login, logout} from "../../store/auth-reducer";
+import {AppStateType} from "../../store/store";
 import {Redirect} from "react-router-dom";
 import {ValidateInput} from "../Decoration/FormControl/FormControl";
 import {maxLengthCreator, required} from "../Decoration/FormControl/validator";

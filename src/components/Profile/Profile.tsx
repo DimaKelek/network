@@ -3,8 +3,8 @@ import S from './Profile.module.css';
 import {ProfileHeader} from "./ProfileHeader/ProfileHeader";
 import {LeftColumn} from "./LeftColumn/LeftColumn";
 import {RightColumn} from './RightColumn/RightColumn';
-import {UserProfileType} from "../../redux/profileReducer";
-import {UserType} from "../../redux/usersReducer";
+import {UserProfileType} from "../../store/profileReducer";
+import {UserType} from "../../store/usersReducer";
 
 type ProfilePropsType = {
     profile: UserProfileType | null
