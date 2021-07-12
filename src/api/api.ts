@@ -1,5 +1,5 @@
 import axios from "axios";
-import {UserType} from "../store/usersReducer";
+import {PhotosType, UserType} from "../store/usersReducer";
 import {UserProfileType} from "../store/profileReducer";
 
 export type AuthMeType = {
@@ -22,6 +22,7 @@ type GetProfileType = UserProfileType
 type ResponseType<D = {}> = {
     resultCode: number
     messages: string[]
+    fieldsErrors: string[]
     data: D
 }
 
@@ -53,6 +54,13 @@ export const profileAPI = {
     updateStatus(status: string) {
         return instance.put<ResponseType>(`profile/status`, {status}).then(response => response.data)
     },
+    editPhotos(file: File) {
+        let formData = new FormData()
+        formData.append("image", file)
+        return instance.put<ResponseType<{photos: PhotosType}>>(`profile/photo`, formData, {
+          headers: {"Content-Type": "multipart/form-data"}
+        }).then(response => response.data)
+    }
 }
 
 export const authAPI = {

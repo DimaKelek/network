@@ -9,13 +9,17 @@ type ProfilePropsType = {
     profile: UserProfileType | null
     status: string
     updateStatus: (status: string) => void
+    updatePhotos: (file: File) => void
+    isOwner: boolean
 }
 
-export function Profile(props: ProfilePropsType) {
+export const Profile: React.FC<ProfilePropsType> = props => {
+    const {profile, isOwner} = props
+
     return (
         <div className={S.content}>
             <ProfileHeader />
-            <LeftColumn profile={props.profile}/>
+            <LeftColumn profile={profile} isOwner={isOwner} updatePhotos={props.updatePhotos}/>
             <RightColumn
                 profile={props.profile}
                 status={props.status}

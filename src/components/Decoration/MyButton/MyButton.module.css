@@ -10,13 +10,12 @@
     font-family: inherit;
     background: #2196f3;
     min-width: 100px;
-
+    transition: .3s;
     margin-bottom: 10px;
 }
 .button:hover {
     background: #1d49aa;
     cursor: pointer;
-    transition: .2s;
 }
 
 .button:focus {

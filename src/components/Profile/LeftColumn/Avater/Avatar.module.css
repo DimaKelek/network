@@ -8,3 +8,29 @@
     margin: 15px;
     width: 200px;
 }
+
+.changeAvatar_container {
+    position: relative;
+}
+
+.input_file {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+}
+
+.changeAvatar {
+    margin: 0 15px;
+    background-color: #2196f3;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    transition: .3s;
+}
+
+.changeAvatar:hover {
+    background-color: #1d49aa;
+    cursor: pointer;
+}

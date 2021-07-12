@@ -8,13 +8,9 @@
     grid-template-areas:
     "d m"
     "d am";
-
-
 }
 
-.textBox {
-    width: 80%;
-}
+
 
 .messages_box {
     background-size: 700px;

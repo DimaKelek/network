@@ -1,0 +1,33 @@
+.input {
+    margin-bottom: 15px;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+}
+
+.checkbox {
+    margin-bottom: 15px;
+}
+
+input {
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    height: 28px;
+    padding: 10px 0 10px 15px;
+    color: #ffffff;
+    background-color: #0c0c0c;
+    border: 1px solid #0c0c0c;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    transition: .3s;
+}
+
+input:focus {
+    border: 1px solid #333333;
+}
+
+.textBox {
+    width: 80%;
+}

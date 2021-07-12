@@ -3,14 +3,12 @@ import S from "./FormControl.module.css"
 
 //@ts-ignore
 const FormControl = props => {
-    const {input, meta, children, ...restProps} = props
-    const hasError = meta.touched && meta.error
+    const {input, meta: {touched, error}, children, ...restProps} = props
+    const hasError = touched && error
     return (
         <div className={`${S.formControl} ${(hasError ? S.error : "")}`}>
-            <div>
-                {children}
-            </div>
-            {hasError && <span>{meta.error}</span>}
+            <div>{children}</div>
+            {hasError && <span>{error}</span>}
         </div>
     )
 }
