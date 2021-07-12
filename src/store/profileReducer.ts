@@ -1,6 +1,8 @@
 import {v1} from "uuid";
 import {profileAPI} from "../api/api";
 import {ActionsTypes, AppThunk} from "./store";
+import {PhotosType} from "./usersReducer";
+import {ServerResponses} from "../utils/enums";
 
 const initialState = {
     posts: [
@@ -53,12 +55,16 @@ export const getStatus = (userID: number): AppThunk => (dispatch) => {
 }
 export const updateStatus = (status: string): AppThunk => (dispatch) => {
     profileAPI.updateStatus(status).then(response => {
-        response.resultCode === 0 && dispatch(profileActions.setProfileStatus(status))
+        if(response.resultCode === ServerResponses.success) {
+            dispatch(profileActions.setProfileStatus(status))
+        }
     })
 }
 export const updatePhotos = (file: File): AppThunk => (dispatch) => {
     profileAPI.editPhotos(file).then(response => {
-        response.resultCode === 0 && dispatch(profileActions.setPhotos(response.data.photos))
+        if(response.resultCode === ServerResponses.success) {
+            dispatch(profileActions.setPhotos(response.data.photos))
+        }
     })
 }
 
@@ -75,10 +81,6 @@ export type UserProfileType = {
     fullName: string
     userId: number
     photos: PhotosType
-}
-type PhotosType = {
-    small: string | null
-    large: string | null
 }
 type ContactsType = {
     facebook: string

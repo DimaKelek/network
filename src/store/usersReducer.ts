@@ -1,5 +1,6 @@
 import {usersAPI} from "../api/api";
 import {ActionsTypes, AppThunk} from "./store";
+import {ServerResponses} from "../utils/enums";
 
 const initialState = {
     users: [] as UserType[],
@@ -67,25 +68,41 @@ export const usersActions = {
 // thunks
 export const getUsers = (checkedPage: number, pageSize: number): AppThunk => (dispatch) => {
     dispatch(usersActions.setLoading(true))
-    usersAPI.getUsers(checkedPage, pageSize).then(data => {
-        dispatch(usersActions.setLoading(false))
-        dispatch(usersActions.setUsers(data.items))
-        dispatch(usersActions.setTotalCount(data.totalCount))
-    })
+    usersAPI.getUsers(checkedPage, pageSize)
+        .then(data => {
+            dispatch(usersActions.setLoading(false))
+            dispatch(usersActions.setUsers(data.items))
+            dispatch(usersActions.setTotalCount(data.totalCount))
+        })
+        .catch(error => {
+            throw error
+        })
 }
 export const follow = (userID: number): AppThunk => (dispatch) => {
     dispatch(usersActions.setFollowInProgress(userID, true))
-    usersAPI.followUser(userID).then(data => {
-        data.resultCode === 0 && dispatch(usersActions.followSuccess(userID))
-        dispatch(usersActions.setFollowInProgress(userID, false))
-    })
+    usersAPI.followUser(userID)
+        .then(data => {
+            if(data.resultCode === ServerResponses.success) {
+                dispatch(usersActions.followSuccess(userID))
+                dispatch(usersActions.setFollowInProgress(userID, false))
+            }
+        })
+        .catch(error => {
+            throw error
+        })
 }
 export const unfollow = (userID: number): AppThunk => (dispatch) => {
     dispatch(usersActions.setFollowInProgress(userID, true))
-    usersAPI.unfollowUser(userID).then(data => {
-        data.resultCode === 0 && dispatch(usersActions.unfollowSuccess(userID))
-        dispatch(usersActions.setFollowInProgress(userID, false))
-    })
+    usersAPI.unfollowUser(userID)
+        .then(data => {
+            if(data.resultCode === ServerResponses.success) {
+                dispatch(usersActions.unfollowSuccess(userID))
+                dispatch(usersActions.setFollowInProgress(userID, false))
+            }
+        })
+        .catch(error => {
+            throw error
+        })
 }
 
 // types

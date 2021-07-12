@@ -1,6 +1,7 @@
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {ActionsTypes, AppThunk} from "./store";
+import {ServerResponses} from "../utils/enums";
 
 const initialState = {
     userId: null as number | null,
@@ -26,7 +27,7 @@ export const authActions = {
 // thunks
 export const login = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch) => {
     authAPI.login(email, password, rememberMe).then(response => {
-        if (response.data.resultCode === 0) {
+        if(response.data.resultCode === ServerResponses.success) {
             dispatch(getAuth())
         } else {
             let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some Error"
@@ -36,7 +37,7 @@ export const login = (email: string, password: string, rememberMe: boolean): App
 }
 export const logout = (): AppThunk => (dispatch) => {
     authAPI.logout().then(response => {
-        if (response.data.resultCode === 0) {
+        if(response.data.resultCode === ServerResponses.success) {
             let newUserData: AuthUserType = {
                 userId: null,
                 email: null,
@@ -49,7 +50,7 @@ export const logout = (): AppThunk => (dispatch) => {
 }
 export const getAuth = (): AppThunk<Promise<void>> => (dispatch) =>
     authAPI.me().then(response => {
-        if (response.data.resultCode === 0) {
+        if(response.data.resultCode === ServerResponses.success) {
             let {id, email, login} = response.data.data
             let newUserData: AuthUserType = {userId: id, email, login, isAuth: true}
             dispatch(authActions.setUserData(newUserData))
