@@ -1,5 +1,5 @@
 import React, {Dispatch} from "react";
-import {DialogPageType, DialogsPageActionsType, sendMessage} from "../../store/dialogsReducer";
+import {DialogPageType, DialogsPageActionsType, dialogsActions} from "../../store/dialogsReducer";
 import {AppStateType} from "../../store/store";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
@@ -24,7 +24,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 const dispatch = (dispatch: Dispatch<DialogsPageActionsType>): MapDispatchPropsType => {
    return {
        sendMessage: (newMessage: string) => {
-           dispatch(sendMessage(newMessage))
+           dispatch(dialogsActions.sendMessage(newMessage))
        }
    }
 }

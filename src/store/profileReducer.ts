@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 import {profileAPI} from "../api/api";
-import {AppThunk} from "./store";
+import {ActionsTypes, AppThunk} from "./store";
 
 const initialState = {
     posts: [
@@ -12,20 +12,20 @@ const initialState = {
     status: ""
 }
 
-export const profileReducer = (state: initialStateType = initialState, action: ProfilePageActionsType): initialStateType => {
+export const profileReducer = (state: initialStateType = initialState, action: ProfileActionsType): initialStateType => {
     switch (action.type) {
-        case "ADD-POST": {
+        case "PROFILE/ADD-POST": {
             let newPost: PostType = {
                 id: v1(),
                 message: action.newPostMessage
             }
             return {...state, posts: [newPost, ...state.posts],}
         }
-        case "SET-USER-PROFILE":
+        case "PROFILE/SET-USER-PROFILE":
             return {...state, profile: action.profile}
-        case "SET-PROFILE-STATUS":
+        case "PROFILE/SET-PROFILE-STATUS":
             return {...state, status: action.status}
-        case "SET-PHOTOS":
+        case "PROFILE/SET-PHOTOS":
             return {...state, profile: {...state.profile, photos: action.photos} as UserProfileType}
         default:
             return state
@@ -33,30 +33,32 @@ export const profileReducer = (state: initialStateType = initialState, action: P
 }
 
 // actions
-export const addPost = (newPostMessage: string) => ({type: "ADD-POST", newPostMessage} as const)
-export const setUserProfile = (profile: UserProfileType) => ({type: "SET-USER-PROFILE", profile} as const)
-export const setProfileStatus = (status: string) => ({type: "SET-PROFILE-STATUS", status} as const)
-export const setPhotos = (photos: PhotosType) => ({type: "SET-PHOTOS", photos} as const)
+export const profileActions = {
+    addPost: (newPostMessage: string) => ({type: "PROFILE/ADD-POST", newPostMessage} as const),
+    setUserProfile: (profile: UserProfileType) => ({type: "PROFILE/SET-USER-PROFILE", profile} as const),
+    setProfileStatus: (status: string) => ({type: "PROFILE/SET-PROFILE-STATUS", status} as const),
+    setPhotos: (photos: PhotosType) => ({type: "PROFILE/SET-PHOTOS", photos} as const)
+}
 
 // thunks
 export const getProfile = (userID: number): AppThunk => (dispatch) => {
     profileAPI.getProfile(userID).then(response => {
-        dispatch(setUserProfile(response))
+        dispatch(profileActions.setUserProfile(response))
     })
 }
 export const getStatus = (userID: number): AppThunk => (dispatch) => {
     profileAPI.getStatus(userID).then(response => {
-        dispatch(setProfileStatus(response.data))
+        dispatch(profileActions.setProfileStatus(response.data))
     })
 }
 export const updateStatus = (status: string): AppThunk => (dispatch) => {
     profileAPI.updateStatus(status).then(response => {
-        response.resultCode === 0 && dispatch(setProfileStatus(status))
+        response.resultCode === 0 && dispatch(profileActions.setProfileStatus(status))
     })
 }
 export const updatePhotos = (file: File): AppThunk => (dispatch) => {
     profileAPI.editPhotos(file).then(response => {
-        response.resultCode === 0 && dispatch(setPhotos(response.data.photos))
+        response.resultCode === 0 && dispatch(profileActions.setPhotos(response.data.photos))
     })
 }
 
@@ -65,7 +67,6 @@ export type PostType = {
     id: string
     message: string
 }
-
 export type UserProfileType = {
     aboutMe: string
     contacts: ContactsType
@@ -89,10 +90,6 @@ type ContactsType = {
     github: string
     mainLink: string
 }
-type initialStateType = typeof initialState
 
-export type ProfilePageActionsType =
-    ReturnType<typeof addPost>
-    | ReturnType<typeof setUserProfile>
-    | ReturnType<typeof setProfileStatus>
-    | ReturnType<typeof setPhotos>
+type initialStateType = typeof initialState
+export type ProfileActionsType = ActionsTypes<typeof profileActions>

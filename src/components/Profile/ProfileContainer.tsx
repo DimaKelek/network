@@ -4,10 +4,10 @@ import {AppStateType} from "../../store/store";
 import {
     getProfile,
     getStatus,
-    setUserProfile,
     updatePhotos,
     updateStatus,
-    UserProfileType
+    UserProfileType,
+    profileActions
 } from "../../store/profileReducer";
 import {Profile} from "./Profile";
 import {RouteComponentProps, withRouter} from "react-router-dom";
@@ -56,6 +56,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
         isAuth: state.auth.isAuth
     }
 }
+const {setUserProfile} = profileActions
 const dispatch: MapDispatchPropsType = {setUserProfile, getProfile, getStatus, updateStatus, updatePhotos}
 
 export default compose<React.ComponentType>(

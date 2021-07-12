@@ -1,46 +1,46 @@
 import {usersAPI} from "../api/api";
-import {AppThunk} from "./store";
+import {ActionsTypes, AppThunk} from "./store";
 
-export const initialState: UsersPageType = {
-    users: [],
+const initialState = {
+    users: [] as UserType[],
     totalCount: 0,
     pageSize: 5,
     checkedPage: 1,
     maxRenderPages: 5,
     minRenderPages: 0,
     isLoading: false,
-    followInProgress: []
+    followInProgress: [] as number[]
 }
 
 export const usersReducer = (state = initialState, action: UsersPageActionsType): UsersPageType => {
     switch (action.type) {
-        case "FOLLOW":
+        case "USERS/FOLLOW":
             return {...state,
                 users: state.users.map(u => {
                     u.id === action.userID && (u.followed = true)
                     return u
                 })
             }
-        case "UNFOLLOW":
+        case "USERS/UNFOLLOW":
             return {...state,
                 users: state.users.map(u => {
                     u.id === action.userID && (u.followed = false)
                     return u
                 })
             }
-        case "SET-USERS":
+        case "USERS/SET-USERS":
             return {...state, users: action.users }
-        case "SET-TOTAL-COUNT":
+        case "USERS/SET-TOTAL-COUNT":
             return {...state, totalCount: action.totalCount}
-        case "SET-CHECKED-PAGE":
+        case "USERS/SET-CHECKED-PAGE":
             return {...state, checkedPage: action.checkedPage}
-        case "SET-MIN-RENDER-PAGE":
+        case "USERS/SET-MIN-RENDER-PAGE":
             return {...state, minRenderPages: action.minRenderPages}
-        case "SET-MAX-RENDER-PAGE":
+        case "USERS/SET-MAX-RENDER-PAGE":
             return {...state, maxRenderPages: action.maxRenderPages}
-        case "SET-LOADING":
+        case "USERS/SET-LOADING":
             return {...state, isLoading: action.isLoading}
-        case "SET-FOLLOW-IN-PROGRESS":
+        case "USERS/SET-FOLLOW-IN-PROGRESS":
             return {...state,
                 followInProgress: action.isLoading
                     ? [...state.followInProgress, action.userID]
@@ -51,46 +51,40 @@ export const usersReducer = (state = initialState, action: UsersPageActionsType)
 }
 
 // actions
-export const followSuccess = (userID: number) =>
-    ({type: "FOLLOW", userID} as const)
-export const unfollowSuccess = (userID: number) =>
-    ({type: "UNFOLLOW", userID} as const)
-export const setUsers = (users: Array<UserType>) =>
-    ({type: "SET-USERS", users} as const)
-export const setTotalCount = (totalCount: number) =>
-    ({type: "SET-TOTAL-COUNT", totalCount} as const)
-export const setCheckedPage = (checkedPage: number) =>
-    ({type: "SET-CHECKED-PAGE", checkedPage} as const)
-export const setMaxRenderPage = (maxRenderPages: number) =>
-    ({type: "SET-MAX-RENDER-PAGE", maxRenderPages} as const)
-export const setMinRenderPage = (minRenderPages: number) =>
-    ({type: "SET-MIN-RENDER-PAGE", minRenderPages} as const)
-export const setLoading = (isLoading: boolean) =>
-    ({type: "SET-LOADING", isLoading} as const)
-export const setFollowInProgress = (userID: number, isLoading: boolean) =>
-    ({type: "SET-FOLLOW-IN-PROGRESS", userID, isLoading} as const)
+export const usersActions = {
+    followSuccess: (userID: number) => ({type: "USERS/FOLLOW", userID} as const),
+    unfollowSuccess: (userID: number) => ({type: "USERS/UNFOLLOW", userID} as const),
+    setUsers: (users: Array<UserType>) => ({type: "USERS/SET-USERS", users} as const),
+    setTotalCount: (totalCount: number) => ({type: "USERS/SET-TOTAL-COUNT", totalCount} as const),
+    setCheckedPage: (checkedPage: number) => ({type: "USERS/SET-CHECKED-PAGE", checkedPage} as const),
+    setMaxRenderPage: (maxRenderPages: number) => ({type: "USERS/SET-MAX-RENDER-PAGE", maxRenderPages} as const),
+    setMinRenderPage: (minRenderPages: number) => ({type: "USERS/SET-MIN-RENDER-PAGE", minRenderPages} as const),
+    setLoading: (isLoading: boolean) => ({type: "USERS/SET-LOADING", isLoading} as const),
+    setFollowInProgress: (userID: number, isLoading: boolean) =>
+        ({type: "USERS/SET-FOLLOW-IN-PROGRESS", userID, isLoading} as const)
+}
 
 // thunks
 export const getUsers = (checkedPage: number, pageSize: number): AppThunk => (dispatch) => {
-    dispatch(setLoading(true))
+    dispatch(usersActions.setLoading(true))
     usersAPI.getUsers(checkedPage, pageSize).then(data => {
-        dispatch(setLoading(false))
-        dispatch(setUsers(data.items))
-        dispatch(setTotalCount(data.totalCount))
+        dispatch(usersActions.setLoading(false))
+        dispatch(usersActions.setUsers(data.items))
+        dispatch(usersActions.setTotalCount(data.totalCount))
     })
 }
 export const follow = (userID: number): AppThunk => (dispatch) => {
-    dispatch(setFollowInProgress(userID, true))
+    dispatch(usersActions.setFollowInProgress(userID, true))
     usersAPI.followUser(userID).then(data => {
-        data.resultCode === 0 && dispatch(followSuccess(userID))
-        dispatch(setFollowInProgress(userID, false))
+        data.resultCode === 0 && dispatch(usersActions.followSuccess(userID))
+        dispatch(usersActions.setFollowInProgress(userID, false))
     })
 }
 export const unfollow = (userID: number): AppThunk => (dispatch) => {
-    dispatch(setFollowInProgress(userID, true))
+    dispatch(usersActions.setFollowInProgress(userID, true))
     usersAPI.unfollowUser(userID).then(data => {
-        data.resultCode === 0 && dispatch(unfollowSuccess(userID))
-        dispatch(setFollowInProgress(userID, false))
+        data.resultCode === 0 && dispatch(usersActions.unfollowSuccess(userID))
+        dispatch(usersActions.setFollowInProgress(userID, false))
     })
 }
 
@@ -107,24 +101,6 @@ export type UserType = {
     status: string | null
     followed: boolean
 }
-export type UsersPageType = {
-    users: Array<UserType>
-    totalCount: number
-    pageSize: number
-    checkedPage: number
-    maxRenderPages: number
-    minRenderPages: number
-    isLoading: boolean
-    followInProgress: number[]
-}
+export type UsersPageType = typeof initialState
 
-export type UsersPageActionsType =
-    ReturnType<typeof followSuccess>
-    | ReturnType<typeof unfollowSuccess>
-    | ReturnType<typeof setUsers>
-    | ReturnType<typeof setTotalCount>
-    | ReturnType<typeof setCheckedPage>
-    | ReturnType<typeof setMaxRenderPage>
-    | ReturnType<typeof setMinRenderPage>
-    | ReturnType<typeof setLoading>
-    | ReturnType<typeof setFollowInProgress>
+export type UsersPageActionsType = ActionsTypes<typeof usersActions>

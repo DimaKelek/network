@@ -2,7 +2,7 @@ import React, {Dispatch} from 'react';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../../../store/store';
 import {MyPosts} from './MyPosts';
-import {addPost, PostType, ProfilePageActionsType} from "../../../../store/profileReducer";
+import {profileActions, PostType, ProfileActionsType} from "../../../../store/profileReducer";
 
 
 type MapStatePropsType = {
@@ -20,10 +20,10 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-const dispatch = (dispatch: Dispatch<ProfilePageActionsType>): MapDispatchPropsType => {
+const dispatch = (dispatch: Dispatch<ProfileActionsType>): MapDispatchPropsType => {
     return {
         addPost: (newPostMessage: string) => {
-            dispatch(addPost(newPostMessage))
+            dispatch(profileActions.addPost(newPostMessage))
         }
     }
 }

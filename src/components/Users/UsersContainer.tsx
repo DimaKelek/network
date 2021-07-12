@@ -1,8 +1,7 @@
 import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../store/store";
-import {follow, getUsers, setCheckedPage, setFollowInProgress, setLoading,
-    setMaxRenderPage, setMinRenderPage, unfollow, UsersPageType} from "../../store/usersReducer";
+import {follow, getUsers, unfollow, UsersPageType, usersActions} from "../../store/usersReducer";
 import {Users} from "./Users";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../Hoc/withAuthRedirect";
@@ -85,7 +84,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
         followInProgress: state.usersPage.followInProgress
     }
 }
-
+const {setCheckedPage, setMinRenderPage, setMaxRenderPage, setLoading, setFollowInProgress} = usersActions
 const dispatch: MapDispatchPropsType = {
     setCheckedPage, setMinRenderPage, setMaxRenderPage,
     setLoading, setFollowInProgress, getUsers, follow, unfollow
