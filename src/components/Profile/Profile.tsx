@@ -17,14 +17,16 @@ export const Profile: React.FC<ProfilePropsType> = props => {
     const {profile, isOwner} = props
 
     return (
-        <div className={S.content}>
+        <div className={S.profile}>
             <ProfileHeader />
-            <LeftColumn profile={profile} isOwner={isOwner} updatePhotos={props.updatePhotos}/>
-            <RightColumn
-                profile={props.profile}
-                status={props.status}
-                updateStatus={props.updateStatus}
-            />
+            <div className={S.content}>
+                <div className={S.left}>
+                    <LeftColumn profile={profile} isOwner={isOwner} updatePhotos={props.updatePhotos}/>
+                </div>
+                <div className={S.right}>
+                    <RightColumn profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+                </div>
+            </div>
         </div>
     );
 }

@@ -48,14 +48,15 @@ export const logout = (): AppThunk => (dispatch) => {
         }
     })
 }
-export const getAuth = (): AppThunk<Promise<void>> => (dispatch) =>
-    authAPI.me().then(response => {
-        if(response.data.resultCode === ServerResponses.success) {
+export const getAuth = (): AppThunk<Promise<void>> => async (dispatch) => {
+    return authAPI.me().then(response => {
+        if (response.data.resultCode === ServerResponses.success) {
             let {id, email, login} = response.data.data
             let newUserData: AuthUserType = {userId: id, email, login, isAuth: true}
             dispatch(authActions.setUserData(newUserData))
         }
     })
+}
 
 // types
 export type AuthActionType = ActionsTypes<typeof authActions>

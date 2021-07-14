@@ -31,7 +31,7 @@ export class Status extends PureComponent<StatusPropsType> {
     }
 
     componentDidUpdate(prevProps: Readonly<StatusPropsType>, prevState: Readonly<{}>) {
-        if(prevProps.status !== this.props.status) {
+        if (prevProps.status !== this.props.status) {
             this.setState({
                 status: this.props.status
             })
@@ -42,8 +42,8 @@ export class Status extends PureComponent<StatusPropsType> {
         return (
             <div className={S.status}>
                 {!this.state.editMode &&
-                    <div onDoubleClick={this.activateEditMode}
-                        className={S.title}>{this.props.status || "No status"}
+                    <div onDoubleClick={this.activateEditMode} className={S.title}>
+                        {this.props.status || "No status"}
                     </div>
                 }
                 {this.state.editMode &&

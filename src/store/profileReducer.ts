@@ -82,7 +82,7 @@ export type UserProfileType = {
     userId: number
     photos: PhotosType
 }
-type ContactsType = {
+export type ContactsType = {
     facebook: string
     website: string
     vk: string

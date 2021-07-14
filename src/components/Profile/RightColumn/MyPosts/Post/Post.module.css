@@ -1,19 +1,12 @@
 .item {
-    padding-bottom: 15px;
-    display: grid;
-    grid-template-areas:
-    "a m"
-    ". r";
-
-    grid-template-columns: 50px 1fr;
-    grid-auto-columns: 2fr 10fr;
-    grid-gap: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .avatar {
     display: flex;
     align-items: flex-end;
-    grid-area: a;
 }
 
 .avatar img {
@@ -23,10 +16,13 @@
 }
 
 .message {
-    grid-area: m;
     background-color: #0c0c0c;
     border-radius: 50px;
     padding: 15px 25px;
     width: 440px;
     min-height: 25px;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    word-break: break-all;
 }

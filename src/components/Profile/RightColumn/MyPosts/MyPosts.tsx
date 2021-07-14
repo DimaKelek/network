@@ -5,7 +5,7 @@ import {MyPostsPropsType} from "./MyPostsContainer";
 import {AddPostFormPropsType, AddPostFormRedux} from "./AddPostForm/AddPostFormRedux";
 
 export const MyPosts: React.FC<MyPostsPropsType> = React.memo(props => {
-    const posts = props.posts.map(p => <Post key={p.id} id={p.id} message={p.message}/>);
+    const posts = props.posts.map(p => <Post key={p.id} message={p.message} photos={props.photos}/>);
 
     const addPost = (values: AddPostFormPropsType) => {
         props.addPost(values.newPostMessage)

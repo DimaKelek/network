@@ -13,12 +13,8 @@ type RightColumnPropsType = {
 export function RightColumn(props: RightColumnPropsType) {
     return (
         <div className={S.content}>
-            <Description
-                profile={props.profile}
-                status={props.status}
-                updateStatus={props.updateStatus}
-            />
-            <MyPostsContainer />
+            <Description profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+            <div><MyPostsContainer/></div>
         </div>
     );
 }

@@ -4,6 +4,7 @@ import {UserType} from "../../store/usersReducer";
 import {Preloader} from "../Decoration/Preloader/Preloader";
 import {User} from "./User/User";
 import {Paginator} from "../Decoration/Paginator/Paginator";
+import {MyPostsContainer} from "../Profile/RightColumn/MyPosts/MyPostsContainer";
 
 type UsersPresentationType = {
     totalCount: number

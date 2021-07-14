@@ -1,0 +1,17 @@
+.title {
+    display: inline-block;
+    width: 100px;
+}
+
+.link {
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    color: #314547;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    display: inline-block;
+}
+.link span:hover {
+    text-shadow: 0 0 10px #038ebc, 0 0 30px #038ebc, 0 0 80px #038ebc   ;
+    color: #fff;
+    transition: .15s;
+}

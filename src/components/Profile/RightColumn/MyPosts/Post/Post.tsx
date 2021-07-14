@@ -1,18 +1,21 @@
 import React from 'react';
-import {PostType} from '../../../../../store/profileReducer';
 import S from './Post.module.css';
+import {PhotosType} from "../../../../../store/usersReducer";
 
-export const Post: React.FC<PostType> = React.memo(props => {
-    const {message, ...restProps} = props
+type PostPropsType = {
+    message: string
+    photos?: PhotosType
+}
+
+export const Post: React.FC<PostPropsType> = React.memo(props => {
+    const {message, photos} = props
     return (
         <div className={S.item}>
             <div className={S.avatar}>
-                <img src="https://goo.su/4zdi" alt=""/>
+                <img src={photos?.small || "https://goo.su/4zdi"} alt=""/>
             </div>
-            <div>
-                <div className={S.message}>
-                    {message}
-                </div>
+            <div className={S.message}>
+                {message}
             </div>
         </div>
     );

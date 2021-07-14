@@ -1,4 +1,5 @@
 .content {
-    grid-area: r;
-    margin-right: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
