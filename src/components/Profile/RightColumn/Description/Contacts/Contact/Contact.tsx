@@ -7,10 +7,10 @@ type ContactPropsType = {
 }
 export const Contact: React.FC<ContactPropsType> = props => {
     return (
-        <div>
-            <span className={S.title}>{props.title}</span>
+        <div className={S.contact_box}>
+            <div className={S.title}>{props.title}</div>
             <div className={S.link}>
-                {(props.contact || "No information").split('').map((l, i) => <span key={i}>{l}</span>)}
+                {(props.contact || "Null").split('').map((l, i) => <span key={i}>{l}</span>)}
             </div>
         </div>
     )

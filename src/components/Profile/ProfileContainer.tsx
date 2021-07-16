@@ -12,6 +12,7 @@ import {
 import {Profile} from "./Profile";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
+import {withAuthRedirect} from "../../Hoc/withAuthRedirect";
 
 class ProfileContainer extends PureComponent<MainProfilePropsType> {
 
@@ -62,7 +63,7 @@ const dispatch: MapDispatchPropsType = {setUserProfile, getProfile, getStatus, u
 export default compose<React.ComponentType>(
     connect(mapStateToProps, dispatch),
     withRouter,
-    // withAuthRedirect
+    withAuthRedirect
 )(ProfileContainer)
 
 // types

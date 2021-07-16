@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {profileAPI} from "../api/api";
+import {profileAPI, UpdateProfileDataType} from "../api/api";
 import {ActionsTypes, AppThunk} from "./store";
 import {PhotosType} from "./usersReducer";
 import {ServerResponses} from "../utils/enums";
@@ -39,7 +39,7 @@ export const profileActions = {
     addPost: (newPostMessage: string) => ({type: "PROFILE/ADD-POST", newPostMessage} as const),
     setUserProfile: (profile: UserProfileType) => ({type: "PROFILE/SET-USER-PROFILE", profile} as const),
     setProfileStatus: (status: string) => ({type: "PROFILE/SET-PROFILE-STATUS", status} as const),
-    setPhotos: (photos: PhotosType) => ({type: "PROFILE/SET-PHOTOS", photos} as const)
+    setPhotos: (photos: PhotosType) => ({type: "PROFILE/SET-PHOTOS", photos} as const),
 }
 
 // thunks
@@ -66,6 +66,16 @@ export const updatePhotos = (file: File): AppThunk => (dispatch) => {
             dispatch(profileActions.setPhotos(response.data.photos))
         }
     })
+}
+
+export const updateProfile = (data: UpdateProfileDataType): AppThunk => (dispatch, getState) => {
+    let userId = getState().profilePage.profile?.userId
+    profileAPI.updateProfile(data)
+        .then(response => {
+            if(response.data.resultCode === ServerResponses.success) {
+                userId && dispatch(getProfile(userId))
+            }
+        })
 }
 
 // types

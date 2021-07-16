@@ -11,14 +11,12 @@ type DescriptionPropsType = {
     profile: UserProfileType | null
     status: string
     updateStatus: (status: string) => void
+    isOwner: boolean
 }
 
 export const Description: React.FC<DescriptionPropsType> = React.memo(props => {
     const {status, updateStatus} = props
-    const [openMode, setOpenMode] = useState<boolean>(false)
 
-    const openInfo = () => {setOpenMode(!openMode)}
-    const infoButtonStyle = `${S.moreInfoButton} ${openMode && S.openMode_button}`
 
     if (!props.profile) {
         return <Preloader/>
@@ -32,10 +30,7 @@ export const Description: React.FC<DescriptionPropsType> = React.memo(props => {
             <div className={S.job}>
                 Looking for a job: {props.profile.lookingForAJob ? "Yes" : "Later"}
             </div>
-            <div className={infoButtonStyle} onClick={openInfo}>
-                <span>{!openMode ? "Watch more" : "Hide info"}</span>
-            </div>
-            <Contacts contacts={props.profile.contacts} openMode={openMode}/>
+            <Contacts contacts={props.profile.contacts} isOwner={props.isOwner}/>
             <StatisticPanel/>
             <Photos/>
         </div>

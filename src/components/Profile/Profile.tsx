@@ -24,7 +24,8 @@ export const Profile: React.FC<ProfilePropsType> = props => {
                     <LeftColumn profile={profile} isOwner={isOwner} updatePhotos={props.updatePhotos}/>
                 </div>
                 <div className={S.right}>
-                    <RightColumn profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+                    <RightColumn profile={props.profile} status={props.status}
+                                 updateStatus={props.updateStatus} isOwner={isOwner}/>
                 </div>
             </div>
         </div>
